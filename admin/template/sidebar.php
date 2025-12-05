@@ -14,7 +14,7 @@
           md:hover:border-r-4 md:hover:border-[#3bba9c]">Category</a>
 
         <a href="#" class="block px-4 py-3 rounded hover:text-[#3bba9c] 
-          md:hover:border-r-4 md:hover:border-[#3bba9c]">Contact</a>
+          md:hover:border-r-4 md:hover:border-[#3bba9c]">Product</a>
       </nav>
 
     </aside>
