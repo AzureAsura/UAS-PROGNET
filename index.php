@@ -1,44 +1,45 @@
 <?php
-session_start();
+session_start(); 
 include("includes/header.php");
+include("functions/userFunction.php");
 ?>
 
-<!-- Toast Notification -->
-<?php if (isset($_SESSION['message'])): ?>
-    <div id="toast-success" 
-        class="fixed bottom-6 right-6 z-50 flex items-center w-[300px] p-4 mb-4 text-green-700 bg-green-100 rounded-lg shadow-lg animate-slide-up">
-        
-        <!-- Icon -->
-        <svg class="w-5 h-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-            d="M5 13l4 4L19 7" />
-        </svg>
+<div class="mt-24 max-w-[1400px] mx-auto px-4">
+    <h2 class="text-3xl font-bold text-start mb-6">Berbagai Produk.</h2>
 
-        <!-- Message -->
-        <span class="text-sm font-medium">
-            <?= $_SESSION['message'] ?>
-        </span>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
+        <?php
+            $categories = getAllActive('tb_kategori');
 
-        <!-- Close button -->
-        <button onclick="document.getElementById('toast-success').remove()" 
-            class="ml-auto text-green-700 hover:text-green-900">
-            ✕
-        </button>
+            if (mysqli_num_rows($categories) > 0) {
+                foreach ($categories as $item) {
+        ?>
+            <a href="products.php?category=<?= $item['slug'] ?>">
+                <div class="flex flex-col items-center justify-center">
+                    <img 
+                        src="uploads/<?= $item['gambar'] ?>" 
+                        alt="<?= $item['nama_kategori'] ?>" 
+                        class="w-24 h-24 object-contain mb-3"
+                    >
+    
+                    <h4 class="font-semibold text-gray-900 text-sm">
+                        <?= $item['nama_kategori'] ?>
+                    </h4>
+    
+                    <p class="text-gray-500 text-sm">
+                        <?= $item['deskripsi'] ?>
+                    </p>
+                </div>
+            </a>
+        <?php
+                }
+            } else {
+                echo "<p class='text-gray-600 col-span-6 text-center'>No data available</p>";
+            }
+        ?>
     </div>
+</div>
 
-    <script>
-        // Auto hide after 4 seconds
-        setTimeout(() => {
-            const toast = document.getElementById('toast-success');
-            if (toast) toast.remove();
-        }, 4000);
-    </script>
 
-<?php
-    unset($_SESSION['message']);
-endif;
-?>
-
-<h1 class="mt-14">Hello World</h1>
 
 <?php include("includes/footer.php") ?>

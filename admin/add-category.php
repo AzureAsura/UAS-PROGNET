@@ -63,7 +63,7 @@
     <div class="flex items-center gap-3">
         <input type="checkbox" name="status"
             class="w-5 h-5 text-[#3bba9c] rounded">
-        <label class="font-medium text-gray-700">Status</label>
+        <label class="font-medium text-gray-700">Empty</label>
     </div>
 
     <!-- POPULAR -->

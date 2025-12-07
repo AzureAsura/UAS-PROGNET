@@ -1,7 +1,9 @@
 <nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+  <div class="max-w-[1400px] mx-auto px-4 py-3 flex justify-between items-center">
     <!-- Logo -->
-    <h1 class="text-xl font-bold text-gray-800">Apple</h1>
+     <a href="index.php">
+       <h1 class="text-xl font-bold text-gray-800">Apple</h1>
+     </a>
 
     <!-- Desktop Menu -->
     <ul class="hidden md:flex gap-6 text-gray-700 font-medium">

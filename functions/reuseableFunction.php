@@ -2,17 +2,24 @@
 
     include('../config/db-config.php');
 
-    // Function fetch all category
+    // Function fetch all data
     function getAll($table){
         global $con;
         $query = "SELECT * FROM $table";
         return $query_run = mysqli_query($con, $query);
     }
 
-    // Function fetch category by id
-    function getCatById($table, $id){
+    // Function fetch data by id
+    function getById($table, $id, $column){
         global $con;
-        $query = "SELECT * FROM $table WHERE id_kategori = '$id'";
+        $query = "SELECT * FROM $table WHERE $column = '$id'";
+        return $query_run = mysqli_query($con, $query);
+    }
+
+    // Function fetch all data that active (client side)
+    function getAllActive($table){
+        global $con;
+        $query = "SELECT * FROM $table WHERE status='0'";
         return $query_run = mysqli_query($con, $query);
     }
 

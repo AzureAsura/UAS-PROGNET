@@ -11,7 +11,7 @@
     if (isset($_GET['id'])) {
 
         $id = $_GET['id'];
-        $category = getCatById("tb_kategori", $id);
+        $category = getById("tb_kategori", $id, "id_kategori");
 
         if (mysqli_num_rows($category) > 0 ) {
             $data = mysqli_fetch_array($category);
@@ -77,7 +77,7 @@
                         <input type="checkbox" name="status"
                             <?= $data['status'] ? "checked":"" ?>
                             class="w-5 h-5 text-[#3bba9c] rounded">
-                        <label class="font-medium text-gray-700">Status</label>
+                        <label class="font-medium text-gray-700">Empty</label>
                     </div>
 
                     <!-- POPULAR -->
