@@ -64,8 +64,6 @@ include("includes/header.php")
         required
         name="password"
       >
-    </div>
-
     <!-- Submit -->
     <button 
       type="submit"
@@ -75,7 +73,15 @@ include("includes/header.php")
       Login
     </button>
   </form>
+        <div class="text-center text-sm text-gray-600 mt-4">
+        <p>Belum punya akun? 
+            <a href="register.php" class="text-blue-600 hover:text-blue-800 font-medium underline">
+                Daftar sekarang
+            </a>
+        </p>
+    </div>
 </div>
+
 
 
 <?php include("includes/footer.php") ?>
