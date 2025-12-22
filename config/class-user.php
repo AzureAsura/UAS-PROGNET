@@ -200,7 +200,7 @@ class User extends Database {
         return $count;
     }
 
-    // BONUS: Method untuk calculate cart total
+    // Method untuk calculate cart total
     public function getCartTotal($userId){
         $query = "SELECT SUM(p.harga_jual * c.prod_qty) as total
                   FROM tb_carts c
@@ -227,7 +227,7 @@ class User extends Database {
         return $total;
     }
 
-    // BONUS: Method untuk add to cart
+    // Method untuk add to cart
     public function addToCart($userId, $productId, $quantity = 1){
         // Cek apakah produk sudah ada di cart
         $checkQuery = "SELECT * FROM tb_carts WHERE id_user = ? AND id_produk = ?";
@@ -291,7 +291,7 @@ class User extends Database {
         }
     }
 
-    // BONUS: Method untuk remove from cart
+    // Method untuk remove from cart
     public function removeFromCart($userId, $cartId){
         $query = "DELETE FROM tb_carts WHERE id_cart = ? AND id_user = ?";
         $stmt = $this->conn->prepare($query);
@@ -339,7 +339,7 @@ class User extends Database {
         return $data ?: false;
     }
 
-    // 2. Ambil semua item dari order (INI YANG DIPERBAIKI)
+    //  Ambil semua item dari order (INI YANG DIPERBAIKI)
     public function getOrderItemsByTracking($tracking_no, $userId) {
         $query = "SELECT 
                     oi.qty, 
@@ -351,8 +351,8 @@ class User extends Database {
                   JOIN tb_orders o ON oi.id_order = o.id_order
                   JOIN tb_produk p ON p.id_produk = oi.id_produk
                   WHERE o.no_tracking = ? AND o.id_user = ?
-                  ORDER BY oi.id_order ASC";  // ganti id_item jadi id_order atau hapus aja
-
+                  ORDER BY oi.id_order ASC";  
+                  
         $stmt = $this->conn->prepare($query);
         if (!$stmt) return [];
 

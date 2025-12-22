@@ -97,7 +97,6 @@ class Auth extends Database {
         if($result->num_rows > 0){
             $userdata = $result->fetch_assoc();
             
-            // Verifikasi password dengan password_verify (untuk password yang di-hash)
             if(password_verify($password, $userdata['password'])){
                 $stmt->close();
                 

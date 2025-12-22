@@ -44,6 +44,7 @@ if (isset($_GET['category'])) {
                                 <p class="font-semibold">
                                     Rp<?= number_format($item['harga_jual'], 0, ',', '.') ?>
                                 </p>
+                                
                             </div>
                         </a>
 

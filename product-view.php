@@ -12,106 +12,78 @@ if (isset($_GET['product'])) {
 
     if ($product) {
 ?>
-        <div class="mt-24 max-w-[1400px] mx-auto px-4 pb-12">
-            <div class="grid md:grid-cols-2 gap-8 product-data">
+    <div class="max-w-[1400px] mx-auto px-6">
 
-                <!-- Left Side -->
-                <div class="space-y-4">
-                    <div class="bg-gray-50 rounded-lg p-8 relative">
-                        <img 
-                            src="uploads/<?= $product['gambar'] ?>" 
-                            alt="<?= $product['nama_produk'] ?>"
-                            class="w-full h-auto object-contain"
-                        >
-                        <?php if($product['popularitas']){ ?>
-                            <span class="absolute top-4 right-4 bg-red-400 text-white px-3 py-1.5 rounded-md text-sm font-semibold">
-                                Trending
-                            </span>
-                        <?php } ?>
-                    </div>
-
-                    <div class="flex gap-3">
-                        <div class="w-20 h-20 bg-gray-50 rounded-lg border-2 border-gray-300 p-2">
-                            <img 
-                                src="uploads/<?= $product['gambar'] ?>" 
-                                class="w-full h-full object-contain"
-                            >
+        <div class="flex max-lg:flex-col gap-12 mt-24 product-data">
+            <div class="flex max-sm:flex-col-reverse gap-3">
+                <div class="flex sm:flex-col gap-3">
+                        <div class="bg-slate-100 flex items-center justify-center size-26 rounded-lg group cursor-pointer">
+                            <img src="uploads/<?= $product['gambar'] ?>" alt="product image" class="w-[100px] h-[100px] hover:scale-105 active:scale-95 transition">
                         </div>
-                    </div>
                 </div>
-
-                <!-- Right Side -->
-                <div class="space-y-4">
-
-                    <h1 class="text-4xl font-bold text-gray-900 mb-3">
-                        <?= $product['nama_produk'] ?>
-                    </h1>
-
-                    <p class="text-gray-600 text-base leading-relaxed">
-                        <?= $product['headline'] ?>
-                    </p>
-
-                    <div class="flex items-center gap-4">
-                        <span class="text-4xl font-bold text-gray-900">
-                            Rp. <?= number_format($product['harga_jual'], 0,  ',', '.') ?>
-                        </span>
-
-                        <?php if($product['harga_asli'] > $product['harga_jual']){ ?>
-                            <span class="text-2xl text-gray-400 line-through">
-                                Rp. <?= number_format($product['harga_asli'], 0, ',', '.') ?>
-                            </span>
-                        <?php } ?>
-                    </div>
-
-                    <div class="flex items-center gap-2 text-sm text-gray-600">
-                        <span class="inline-block w-5 h-5">🏷️</span>
-                        <span>Save 6% right now</span>
-                    </div>
-
-                    <div class="flex items-center gap-2">
-                        <button class="decrement_btn bg-gray-200 px-3 py-1 rounded">-</button>
-                        <input type="text" class="qty-input w-12 text-center border border-gray-300 rounded" value="1">
-                        <button class="increment_btn bg-gray-200 px-3 py-1 rounded">+</button>
-                    </div>
-
-                    <div class="space-y-3">
-                        <button class="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 px-6 rounded-lg transition add-to-cart" value="<?= $product['id_produk'] ?>">
-                            Add to Cart
-                        </button>
-                        <button class="w-full bg-white hover:bg-gray-50 text-gray-900 font-semibold py-4 px-6 rounded-lg border-2 border-gray-900 transition">
-                            Add to Wishlist
-                        </button>
-                    </div>
-
-                    <div class="space-y-3 pt-4 border-t">
-                        <div class="flex items-start gap-3 text-gray-700">
-                            <span class="text-xl">📦</span> Free shipping worldwide
-                        </div>
-                        <div class="flex items-start gap-3 text-gray-700">
-                            <span class="text-xl">🔒</span> 100% Secured Payment
-                        </div>
-                        <div class="flex items-start gap-3 text-gray-700">
-                            <span class="text-xl">👤</span> Trusted by top brands
-                        </div>
-                    </div>
-
+                <div class="flex justify-center items-center h-100 sm:size-113 bg-slate-100 rounded-lg ">
+                    <img src="uploads/<?= $product['gambar'] ?>" alt="product image" class="w-[450px] md:h-[450px] h-[350px] object-contain">
                 </div>
             </div>
+            <div class="flex-1">
+                <h1 class="text-3xl font-semibold text-slate-800"> <?= $product['nama_produk'] ?></h1>
 
-            <div class="mt-12 border-t">
-                <div class="flex gap-8 border-b">
-                    <button class="px-4 py-4 font-semibold text-gray-900 border-b-2 border-gray-900">
-                        Description
+                <div class="flex items-start mb-6 mt-2 gap-3 text-2xl font-semibold text-slate-800">
+                    <p>Rp. <?= number_format($product['harga_jual'], 0,  ',', '.') ?></p>
+                    <p class="text-xl text-slate-500 line-through">
+                        Rp. <?= number_format($product['harga_asli'], 0, ',', '.') ?>
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 text-slate-500">
+                    <TagIcon size={14} />
+                    <p>Save 10% right now</p>
+                </div>
+                <div class="flex items-end gap-5 mt-10">
+                            <div class="flex flex-col gap-3">
+                                <p class="text-lg text-slate-800 font-semibold">Quantity</p>
+                                <div class="flex items-center gap-2">
+                                    <!-- <button class="decrement_btn bg-gray-200 px-3 py-1 rounded">-</button>
+                                    <input type="text" class="qty-input w-12 text-center border border-gray-300 rounded" value="1">
+                                    <button class="increment_btn bg-gray-200 px-3 py-1 rounded">+</button> -->
+
+                                    <button class="decrement_btn bg-gray-200 w-11 h-11 rounded flex items-center justify-center">-</button>
+                                    <input type="text" class="w-12 h-11 text-center border rounded qty-input" value="1">
+                                    <button class="increment_btn bg-gray-200 w-11 h-11 rounded flex items-center justify-center">+</button>
+
+                                </div>
+                            </div>
+
+                    <button class="bg-slate-800 text-white px-10 py-3 text-sm font-medium rounded hover:bg-slate-900 active:scale-95 transition add-to-cart" value="<?= $product['id_produk'] ?>">
+                        Add to cart
                     </button>
                 </div>
+                <hr class="border-gray-300 my-5" />
+                <div class="flex flex-col gap-4 text-slate-500">
+                    <div class="flex items-center gap-2 text-slate-500">
+                    <i class="ri-price-tag-3-line text-sm"></i>
+                    <p>Save 10% right now</p>
+                    </div>
 
-                <div class="py-8">
-                    <p class="text-gray-700 leading-relaxed">
-                        <?= nl2br($product['deskripsi']) ?>
+                    <p class="flex gap-3 items-center">
+                    <i class="ri-earth-line text-slate-400"></i>
+                    Free shipping worldwide
                     </p>
+
                 </div>
+
             </div>
         </div>
+
+        <div class="mt-14 text-sm text-black w-full">
+            <div class="flex border-b border-gray-300 mb-6">
+                    <button class='text-black py-2 font-semibold'>
+                        Description
+                    </button>
+            </div>
+
+            <p class="text-md"><?= nl2br($product['deskripsi']) ?></p>
+        </div>
+    </div>
 <?php
     } else {
         echo "<div class='mt-20 max-w-[1400px] mx-auto px-4'>Product not found</div>";

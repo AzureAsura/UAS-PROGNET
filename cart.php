@@ -17,7 +17,7 @@ include("middleware/clientMiddleware.php");
         ?>
 
         <!-- CART ITEM (100% SAMA DENGAN YANG KAMU PAKAI) -->
-        <div class="border-b pb-4 product-data flex items-center justify-between">
+        <div class="cart-item border-b pb-4 product-data flex items-center justify-between">
 
             <input type="hidden" class="cartid" value="<?= $cart['cid'] ?>">
             <input type="hidden" class="prodid" value="<?= $cart['id_produk'] ?>">

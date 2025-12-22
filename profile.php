@@ -18,6 +18,10 @@ $orders  = getOrders();
 
 <div class="mt-24 max-w-[1400px] mx-auto px-4 space-y-10 py-8">
 
+<a href="logout.php">
+    <p>logout</p>
+</a>
+
     <!-- Title -->
     <h2 class="text-4xl font-bold text-gray-800">Profile Saya</h2>
 

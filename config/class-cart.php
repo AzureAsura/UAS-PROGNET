@@ -19,7 +19,7 @@ class Cart extends Database {
         $result = $checkStmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Sudah ada → update jumlah
+
             $row = $result->fetch_assoc();
             $newQty = $row['prod_qty'] + $quantity;
 
@@ -37,7 +37,7 @@ class Cart extends Database {
                 'message' => $success ? 'Jumlah produk di keranjang diperbarui' : 'Gagal memperbarui keranjang'
             ];
         } else {
-            // Belum ada → insert baru
+
             $checkStmt->close();
 
             $insertQuery = "INSERT INTO tb_carts (id_user, id_produk, prod_qty) VALUES (?, ?, ?)";
@@ -63,7 +63,7 @@ class Cart extends Database {
     public function updateQuantity($cartId, $userId, $quantity)
     {
         if ($quantity <= 0) {
-            return $this->removeFromCart($cartId, $userId); // otomatis hapus kalau qty ≤ 0
+            return $this->removeFromCart($cartId, $userId);
         }
 
         $query = "UPDATE tb_carts SET prod_qty = ? WHERE id_cart = ? AND id_user = ?";
