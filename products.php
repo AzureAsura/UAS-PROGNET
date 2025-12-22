@@ -19,7 +19,7 @@ if (isset($_GET['category'])) {
         <div class="mt-24 max-w-[1400px] mx-auto px-4">
             <h2 class="text-3xl font-bold text-start mb-6"><?= $category['nama_kategori'] ?></h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 text-center">
                 <?php
 
                 // Ambil product by category
@@ -28,25 +28,22 @@ if (isset($_GET['category'])) {
                 if (!empty($products)) {
                     foreach ($products as $item) {
                 ?>
-                        <a href="product-view.php?product=<?= $item['slug'] ?>">
-                            <div class="group bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 
-                                    flex flex-col items-center justify-center border border-gray-100 hover:border-gray-200">
 
-                                <div class="w-24 h-24 mb-3 flex items-center justify-center">
-                                    <img
-                                        src="uploads/<?= $item['gambar'] ?>"
-                                        alt="<?= $item['nama_produk'] ?>"
-                                        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105">
-                                </div>
+                        <a href="product-view.php?product=<?= $item['slug'] ?>" class="group block">
 
-                                <h4 class="font-semibold text-gray-900 text-sm group-hover:text-black">
+                            <div class="bg-[#F5F5F5] rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                                <img src="uploads/<?= $item['gambar'] ?>"
+                                    alt="<?= $item['nama_produk'] ?>"
+                                    class="max-h-full w-auto object-contain">
+                            </div>
+
+                            <div class="mt-4 flex justify-between items-center text-sm text-slate-800">
+                                <p class="font-medium truncate max-w-[60%]">
                                     <?= $item['nama_produk'] ?>
-                                </h4>
-
-                                <p class="text-gray-500 text-xs mt-1">
-                                    <?= substr($item['headline'], 0, 50) ?>
                                 </p>
-
+                                <p class="font-semibold">
+                                    Rp<?= number_format($item['harga_jual'], 0, ',', '.') ?>
+                                </p>
                             </div>
                         </a>
 

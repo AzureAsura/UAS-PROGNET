@@ -105,37 +105,39 @@ if (isset($_POST['add_category_btn'])) {
 } else if (isset($_POST['add_product_btn'])) {
 
     $category_id = $_POST['id_kategori'];
+    var_dump($_FILES);
+    echo $_FILES['gambar']['name'][0];
+    echo $_FILES['gambar']['name'][1];
+    // $name = $_POST['nama_produk'];
+    // $slug = $_POST['slug'];
+    // $headline = $_POST['headline'];
+    // $description = $_POST['deskripsi'];
+    // $original_price = str_replace('.', '', $_POST['harga_asli']);
+    // $selling_price = str_replace('.', '', $_POST['harga_jual']);
+    // $qty = $_POST['qty'];
+    // $meta_title = $_POST['meta_title'];
+    // $meta_description = $_POST['meta_description'];
+    // $meta_keywords = $_POST['meta_keywords'];
+    // $status = isset($_POST['status']) ? '1' : '0';
+    // $popular = isset($_POST['popularitas']) ? '1' : '0';
 
-    $name = $_POST['nama_produk'];
-    $slug = $_POST['slug'];
-    $headline = $_POST['headline'];
-    $description = $_POST['deskripsi'];
-    $original_price = str_replace('.', '', $_POST['harga_asli']);
-    $selling_price = str_replace('.', '', $_POST['harga_jual']);
-    $qty = $_POST['qty'];
-    $meta_title = $_POST['meta_title'];
-    $meta_description = $_POST['meta_description'];
-    $meta_keywords = $_POST['meta_keywords'];
-    $status = isset($_POST['status']) ? '1' : '0';
-    $popular = isset($_POST['popularitas']) ? '1' : '0';
+    // $image = $_FILES['gambar']['name'];
+    // $path = "../uploads/";
+    // $image_ext = pathinfo($image, PATHINFO_EXTENSION);
+    // $filename = time() . '.' . $image_ext;
 
-    $image = $_FILES['gambar']['name'];
-    $path = "../uploads/";
-    $image_ext = pathinfo($image, PATHINFO_EXTENSION);
-    $filename = time() . '.' . $image_ext;
+    // $product_query = "INSERT INTO tb_produk (id_kategori,nama_produk,slug,headline,deskripsi,harga_asli,harga_jual,qty,meta_title,meta_description,meta_keywords,status,popularitas,gambar) VALUES ('$category_id', '$name', '$slug', '$headline', '$description', '$original_price', '$selling_price', '$qty', '$meta_title', '$meta_description', '$meta_keywords', '$status', '$popular', '$filename')";
 
-    $product_query = "INSERT INTO tb_produk (id_kategori,nama_produk,slug,headline,deskripsi,harga_asli,harga_jual,qty,meta_title,meta_description,meta_keywords,status,popularitas,gambar) VALUES ('$category_id', '$name', '$slug', '$headline', '$description', '$original_price', '$selling_price', '$qty', '$meta_title', '$meta_description', '$meta_keywords', '$status', '$popular', '$filename')";
+    // $product_query_run = mysqli_query($con, $product_query);
 
-    $product_query_run = mysqli_query($con, $product_query);
+    // if ($product_query_run) {
 
-    if ($product_query_run) {
+    //     move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $filename);
 
-        move_uploaded_file($_FILES['gambar']['tmp_name'], $path . $filename);
-
-        redirect("add-product.php", "Product Added Successfully");
-    } else {
-        redirect("add-product.php", "Something went wrong");
-    }
+    //     redirect("add-product.php", "Product Added Successfully");
+    // } else {
+    //     redirect("add-product.php", "Something went wrong");
+    // }
 } else if (isset($_POST['update_product_btn'])) {
     $category_id = $_POST['id_kategori'];
     $product_id = $_POST['id_produk'];

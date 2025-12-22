@@ -7,14 +7,60 @@ $user = new User();
 ?>
 
 <div class="mt-24 max-w-[1400px] mx-auto px-4">
-    <h2 class="text-3xl font-bold text-start mb-6">Berbagai Produk.</h2>
+
+    <div class=''>
+        <div class='flex max-xl:flex-col gap-8  mx-auto my-10'>
+            <div class='relative flex-1 flex flex-col bg-green-200 rounded-3xl xl:min-h-100 group'>
+                <div class='p-5 sm:p-16'>
+                    <div class='inline-flex items-center gap-3 bg-green-300 text-green-600 pr-4 p-1 rounded-full text-xs sm:text-sm'>
+                        <span class='bg-green-600 px-3 py-1 max-sm:ml-1 rounded-full text-white text-xs'>NEWS</span> Free Shipping on Orders Above $50!
+                        <ChevronRightIcon class='group-hover:ml-2 transition-all' size={16} />
+                    </div>
+                    <h2 class='text-3xl sm:text-5xl leading-[1.2] my-3 font-medium bg-gradient-to-r from-slate-600 to-[#A0FF74] bg-clip-text text-transparent max-w-xs  sm:max-w-md'>
+                        Gadgets you'll love. Prices you'll trust.
+                    </h2>
+                    <div class='text-slate-800 text-sm font-medium mt-4 sm:mt-8'>
+                        <p>Starts from</p>
+                        <p class='text-3xl'>Rp. 10.000.000</p>
+                    </div>
+                    <button class='bg-slate-800 text-white text-sm py-2.5 px-7 sm:py-5 sm:px-12 mt-4 sm:mt-10 rounded-md hover:bg-slate-900 hover:scale-103 active:scale-95 transition'>LEARN MORE</button>
+                </div>
+                <img src="assets/img/hero.png" alt="" class='sm:absolute bottom-0 right-0 md:right-10 w-full sm:max-w-sm'>
+            </div>
+            <div class='flex flex-col md:flex-row xl:flex-col gap-5 w-full xl:max-w-sm text-sm text-slate-600'>
+                <div class='flex-1 flex items-center justify-between w-full bg-orange-200 rounded-3xl p-6 px-8 group'>
+                    <div>
+                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#FFAD51] bg-clip-text text-transparent max-w-40'>Best products</p>
+                        <div class="flex items-center gap-1 mt-4">
+                            <p>View more
+                            </p>
+                            <i class="ri-arrow-right-line flex items"></i>
+                        </div>
+                    </div>
+                    <img src="assets/img/hero-p-2.png" alt="hero" class="w-32">
+
+                </div>
+                <div class='flex-1 flex items-center justify-between w-full bg-blue-200 rounded-3xl p-6 px-8 group'>
+                    <div>
+                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#78B2FF] bg-clip-text text-transparent max-w-40'>20% discounts</p>
+                        <div class="flex items-center gap-1 mt-4">
+                            <p>View more
+                            </p>
+                            <i class="ri-arrow-right-line flex items"></i>
+                        </div>
+                    </div>
+                    <img src="assets/img/hero-p-1.png" alt="" class="w-32">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
         <?php
 
         $categories = $user->getAllActive('tb_kategori');
         $countcategories = 1;
-        $maxcategories = 4;
+        $maxcategories = 6;
         if (!empty($categories)) {
             foreach ($categories as $item) {
                 if ($countcategories > $maxcategories) {
@@ -47,39 +93,94 @@ $user = new User();
         ?>
     </div>
 
-    <h2 class="text-3xl font-bold text-start mb-6">Trending</h2>
+    <div class='flex flex-col items-center mt-24'>
+        <h2 class='text-2xl font-semibold text-slate-800'>Trending Products</h2>
+        <a href="#" class='flex items-center gap-5 text-sm text-slate-600 mt-2'>
+            <p class='max-w-lg text-center'>Showing 4 of 12 products</p>
+            <button class='text-green-500 flex items-center gap-1'>View more
+                <i class="ri-arrow-right-line flex items"></i>
+            </button>
+        </a>
+    </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 mt-14">
+
         <?php
-
         $trending = $user->getTrending();
+        $counttrending = 1;
+        $maxtrending = 8;
 
         if (!empty($trending)) {
             foreach ($trending as $item) {
+                if ($counttrending > $maxtrending) {
+                    break;
+                } else {
+                    $counttrending++;
+                }
+
         ?>
-                <a href="product-view.php?product=<?= $item['slug'] ?>">
-                    <div class="flex flex-col items-center justify-center">
-                        <img
-                            src="uploads/<?= $item['gambar'] ?>"
+                <a href="product-view.php?product=<?= $item['slug'] ?>" class="group block">
+
+                    <div class="bg-[#F5F5F5] rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <img src="uploads/<?= $item['gambar'] ?>"
                             alt="<?= $item['nama_produk'] ?>"
-                            class="w-24 h-24 object-contain mb-3">
+                            class="max-h-full w-auto object-contain">
+                    </div>
 
-                        <h4 class="font-semibold text-gray-900 text-sm">
+                    <div class="mt-4 flex justify-between items-center text-sm text-slate-800">
+                        <p class="font-medium truncate max-w-[60%]">
                             <?= $item['nama_produk'] ?>
-                        </h4>
-
-                        <p class="text-gray-500 text-sm">
-                            <?= $item['headline'] ?>
+                        </p>
+                        <p class="font-semibold">
+                            Rp<?= number_format($item['harga_jual'], 0, ',', '.') ?>
                         </p>
                     </div>
                 </a>
         <?php
             }
         } else {
-            echo "<p class='text-gray-600 col-span-6 text-center'>No data available</p>";
+            echo "<p class='text-gray-600 col-span-4 text-center'>No data available</p>";
         }
         ?>
     </div>
+
+    <div class='flex flex-col items-center mt-24'>
+        <h2 class='text-2xl font-semibold text-slate-800'>Our Specifications</h2>
+        <a href="#" class='flex items-center gap-5 text-sm text-slate-600 mt-2'>
+            <p class='max-w-lg text-center'> We offer top-tier service and convenience to ensure your shopping experience is smooth, secure and completely hassle-free.</p>
+        </a>
+    </div>
+
+    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 gap-y-10 mt-14'>
+        <div class='relative h-44 px-8 flex flex-col items-center justify-center w-full text-center border rounded-lg group bg-green-200'>
+            <h3 class='text-slate-800 font-medium'>Free Shipping</h3>
+            <p class='text-sm text-slate-600 mt-3'>Enjoy fast, free delivery on every order no conditions, just reliable doorstep.</p>
+            <div class='absolute -top-5 text-white size-10 flex items-center justify-center rounded-md group-hover:scale-105 transition bg-green-400'>
+                <i class="ri-send-plane-line"></i>
+            </div>
+        </div>
+
+        <div class='relative h-44 px-8 flex flex-col items-center justify-center w-full text-center border rounded-lg group bg-orange-200'>
+            <h3 class='text-slate-800 font-medium'>7 Days easy Return</h3>
+            <p class='text-sm text-slate-600 mt-3'>Change your mind? No worries. Return any item within 7 days.</p>
+            <div class='absolute -top-5 text-white size-10 flex items-center justify-center rounded-md group-hover:scale-105 transition bg-orange-400'>
+                <i class="ri-time-line text-white"></i>
+            </div>
+        </div>
+
+        <div class='relative h-44 px-8 flex flex-col items-center justify-center w-full text-center border rounded-lg group bg-purple-200'>
+            <h3 class='text-slate-800 font-medium'>24/7 Customer Support</h3>
+            <p class='text-sm text-slate-600 mt-3'>We're here for you. Get expert help with our customer support.</p>
+            <div class='absolute -top-5 text-white size-10 flex items-center justify-center rounded-md group-hover:scale-105 transition bg-purple-400'>
+                <i class="ri-customer-service-2-line text-white"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-[500px]">
+
+    </div>
+
 </div>
 
 

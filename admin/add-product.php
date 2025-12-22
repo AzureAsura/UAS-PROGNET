@@ -56,8 +56,8 @@
         <!-- IMAGE -->
         <div class="flex flex-col gap-1">
             <label class="font-medium text-gray-700">Upload Image</label>
-            <input type="file" name="gambar" required
-                class="border border-gray-300 rounded-lg px-3 py-2 bg-white">
+            <input type="file" name="gambar[]" required
+                class="border border-gray-300 rounded-lg px-3 py-2 bg-white" multiple>
         </div>
 
         <!-- CATEGORY -->
