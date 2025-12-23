@@ -11,7 +11,7 @@ $user = new User();
         <div class="mt-24 max-w-[1400px] mx-auto px-4">
             <h2 class="text-3xl font-bold text-start mb-6">Trending Products</h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 mt-14">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-14 mt-14">
 
                 <?php
                 $trending = $user->getTrending();
