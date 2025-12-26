@@ -3,7 +3,7 @@
             <div class="flex items-center justify-between max-w-[1400px] mx-auto px-4 py-3 transition-all">
 
                 <a href="index.php" class="relative text-4xl font-semibold text-slate-700">
-                    <img src="assets/img/logo.png" alt="" class="h-10">
+                    <img src="assets/img/ALDYN.png" alt="" class="h-10">
                 </a>
 
                 <!-- {/* Desktop Menu */} -->
