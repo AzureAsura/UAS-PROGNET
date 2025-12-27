@@ -9,87 +9,121 @@ if (isset($_SESSION['auth'])) {
 }
 
 include("includes/header.php") 
-
 ?>
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+<div class="mt-28 flex items-center justify-center px-4">
 
+  <div class="w-full max-w-5xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden grid grid-cols-1 md:grid-cols-2">
 
-  <form class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-4" action="proses/proses-auth-register.php" method="POST">
-    <h2 class="text-2xl font-bold text-gray-800 text-center">Register</h2>
+    <!-- LEFT : FORM -->
+    <div class="p-8 md:p-12">
 
-    <!-- Name -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-      <input 
-        type="text" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your name"
-        required
-        name="name"
+      <h2 class="text-3xl font-semibold text-gray-900 mb-2">
+        Create account
+      </h2>
+      <p class="text-sm text-gray-500 mb-8">
+        Register to get started
+      </p>
+
+      <form 
+        action="proses/proses-auth-register.php" 
+        method="POST" 
+        class="space-y-6"
       >
+
+        <!-- Name -->
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            required
+            class="w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 focus:outline-none focus:border-gray-900"
+            placeholder="Your name"
+          />
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">
+            Phone Number
+          </label>
+          <input
+            type="number"
+            name="phone"
+            required
+            class="w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 focus:outline-none focus:border-gray-900"
+            placeholder="08xxxxxxxx"
+          />
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">
+            Email address
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 focus:outline-none focus:border-gray-900"
+            placeholder="name@email.com"
+          />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            required
+            class="w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 focus:outline-none focus:border-gray-900"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <!-- Confirm -->
+        <div>
+          <label class="block text-sm text-gray-600 mb-1">
+            Confirm password
+          </label>
+          <input
+            type="password"
+            name="cpassword"
+            required
+            class="w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 focus:outline-none focus:border-gray-900"
+            placeholder="••••••••"
+          />
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          name="register_btn"
+          class="w-full h-11 rounded-lg bg-gray-900 text-white font-medium hover:bg-black transition"
+        >
+          Create account
+        </button>
+
+      </form>
+
     </div>
 
-    <!-- Phone Number -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-      <input 
-        type="number" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your phone number"
-        required
-        name="phone"
-      >
+    <!-- RIGHT : IMAGE -->
+    <div class="hidden md:block relative">
+      <img 
+        src="assets/img/register.jpg"
+        alt="Register Illustration"
+        class="w-full h-full object-cover"
+      />
     </div>
 
-    <!-- Email -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-      <input 
-        type="email" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your email"
-        required
-        name="email"
-      >
-    </div>
-
-    <!-- Password -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-      <input 
-        type="password" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your password"
-        required
-        name="password"
-      >
-    </div>
-
-    <!-- Confirm -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-      <input 
-        type="password" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Confirm your password"
-        required
-        name="cpassword"
-      >
-    </div>
-
-    <!-- Submit -->
-    <button 
-      type="submit"
-      class="w-full py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
-      name="register_btn"
-    >
-      Register
-    </button>
-  </form>
+  </div>
 </div>
 
-
 <?php include("includes/footer.php") ?>
-
-

@@ -9,50 +9,77 @@ if (isset($_SESSION['auth'])) {
 }
 
 include("includes/header.php") 
-
 ?>
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+<div class="mt-28 flex items-center justify-center px-4">
 
-  <form class="bg-white p-6 rounded-lg shadow-md w-full max-w-sm space-y-4" action="proses/proses-auth-login.php" method="POST">
-    <h2 class="text-2xl font-bold text-gray-800 text-center">Login</h2>
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-200 p-8 space-y-10">
 
-    <!-- Email -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-      <input 
-        type="email" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your email"
-        required
-        name="email"
-      >
-    </div>
+  <div>
+    <h2 class="text-center text-3xl font-semibold text-gray-900 mb-5">
+      Welcome
+    </h2>
 
-    <!-- Password -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-      <input 
-        type="password" 
-        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none"
-        placeholder="Enter your password"
-        required
-        name="password"
-      >
-    </div>
+    <p class="text-center text-gray-500 text-sm">
+      Sign in to your account
+    </p>
 
-    <!-- Submit -->
-    <button 
-      type="submit"
-      class="w-full py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition"
-      name="login_btn"
+  </div>
+
+    <form 
+      method="POST" 
+      action="proses/proses-auth-login.php" 
+      class="space-y-6"
     >
-      Login
-    </button>
-  </form>
+
+      <!-- Email -->
+      <div class="relative">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Email"
+          class="peer w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 placeholder-transparent focus:outline-none focus:border-gray-900"
+        />
+      <label class="absolute left-0 -top-4 text-xs text-gray-500">
+        Email address
+      </label>
+
+      </div>
+
+      <!-- Password -->
+      <div class="relative">
+        <input
+          type="password"
+          name="password"
+          required
+          placeholder="Password"
+          class="peer w-full h-11 border-b border-gray-300 bg-transparent text-gray-900 placeholder-transparent focus:outline-none focus:border-gray-900"
+        />
+      <label class="absolute left-0 -top-4 text-xs text-gray-500">
+        Password
+      </label>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        name="login_btn"
+        class="w-full h-11 rounded-lg bg-gray-900 text-white font-medium hover:bg-black transition"
+      >
+        Sign in
+      </button>
+
+    </form>
+
+    <div class="text-center text-sm text-gray-500">
+      Don’t have an account?
+      <a href="register.php" class="text-gray-900 hover:underline font-medium">
+        Create one
+      </a>
+    </div>
+
+  </div>
 </div>
 
-
 <?php include("includes/footer.php") ?>
-
-
