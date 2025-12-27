@@ -16,74 +16,128 @@ $profile = getProfile();
 $orders  = getOrders();         
 ?>
 
-<div class="mt-24 max-w-[1400px] mx-auto px-4 space-y-10 py-8">
+<div class=" pt-24 pb-10">
+    <div class="max-w-[1400px] mx-auto px-4">
+        
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-gray-900 tracking-tight">Akun</h1>
+            <a href="logout.php" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                Keluar
+            </a>
+        </div>
 
-<a href="logout.php">
-    <p>logout</p>
-</a>
-
-    <!-- Title -->
-    <h2 class="text-4xl font-bold text-gray-800">Profile Saya</h2>
-
-    <!-- PROFILE CARD -->
-    <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="text-2xl font-bold text-blue-600 mb-6">Informasi Akun</h3>
-
-        <?php if ($profile): ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-                <p><span class="font-semibold text-gray-600">Nama:</span> <?= $profile['nama_user'] ?></p>
-                <p><span class="font-semibold text-gray-600">Email:</span> <?= $profile['email'] ?></p>
-                <p><span class="font-semibold text-gray-600">No Telp:</span> <?= $profile['no_telp'] ?></p>
-                <p><span class="font-semibold text-gray-600">Bergabung:</span> <?= date("d M Y", strtotime($profile['created_at'] ?? 'now')) ?></p>
-            </div>
-        <?php else: ?>
-            <p class="text-gray-500">Data profil tidak ditemukan.</p>
-        <?php endif; ?>
-    </div>
-
-    <a href="add-address.php"
-   class="inline-block mt-4 px-4 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition">
-    + Tambah Alamat
-</a>
-
-
-    <!-- ORDER HISTORY -->
-    <div class="bg-white rounded-2xl shadow-lg p-8">
-        <h3 class="text-2xl font-bold text-blue-600 mb-6">Riwayat Pesanan</h3>
-
-        <?php if (!empty($orders)): ?>
-            <div class="space-y-4">
-                <?php foreach ($orders as $order): ?>
-                    <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                            <div class="space-y-2">
-                                <p class="text-lg font-semibold">#<?= $order['no_tracking'] ?></p>
-                                <p class="text-gray-600">Tanggal: <?= date("d M Y, H:i", strtotime($order['created_at'])) ?></p>
-                                <p class="text-xl font-bold text-blue-600">
-                                    Rp <?= number_format($order['total_harga'], 0,',','.') ?>
-                                </p>
-                                <span class="inline-block px-3 py-1 text-sm font-medium rounded-full 
-                                    <?= $order['status'] == 0 ? 'bg-yellow-100 text-yellow-800' : 
-                                       ($order['status'] == 1 ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800') ?>">
-                                    <?= $order['status'] == 0 ? 'Menunggu Pembayaran' : 
-                                       ($order['status'] == 1 ? 'Diproses' : 'Selesai') ?>
-                                </span>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <div class="lg:col-span-1 space-y-4">
+                <!-- Profile Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6">Informasi Pribadi</h2>
+                        
+                        <?php if ($profile): ?>
+                            <div class="space-y-5">
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-500 mb-1">Nama</span>
+                                    <span class="text-sm text-gray-900 font-medium"><?= $profile['nama_user'] ?></span>
+                                </div>
+                                <div class="h-px bg-gray-100"></div>
+                                
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-500 mb-1">Email</span>
+                                    <span class="text-sm text-gray-900"><?= $profile['email'] ?></span>
+                                </div>
+                                <div class="h-px bg-gray-100"></div>
+                                
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-500 mb-1">Telepon</span>
+                                    <span class="text-sm text-gray-900"><?= $profile['no_telp'] ?></span>
+                                </div>
+                                <div class="h-px bg-gray-100"></div>
+                                
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-500 mb-1">Bergabung</span>
+                                    <span class="text-sm text-gray-900"><?= date("d M Y", strtotime($profile['created_at'] ?? 'now')) ?></span>
+                                </div>
                             </div>
-
-                            <a href="order-details.php?t=<?= urlencode($order['no_tracking']) ?>"
-                               class="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 transition transform hover:scale-105">
-                                Lihat Detail
-                            </a>
-                        </div>
+                        <?php else: ?>
+                            <p class="text-sm text-gray-500">Data profil tidak tersedia</p>
+                        <?php endif; ?>
                     </div>
-                <?php endforeach; ?>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:border-gray-200 transition-colors">
+                    <a href="add-address.php" class="block p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900">Kelola Alamat</span>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
             </div>
-        <?php else: ?>
-            <div class="text-center py-12">
-                <p class="text-xl text-gray-500">Belum ada pesanan.</p>
-                <a href="index.php" class="mt-4 inline-block text-blue-600 hover:underline">Mulai Belanja</a>
+
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 sm:p-8">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6">Pesanan</h2>
+
+                        <?php if (!empty($orders)): ?>
+                            <div class="space-y-4">
+                                <?php foreach ($orders as $order): ?>
+                                    <div class="border border-gray-100 rounded-xl p-5 hover:border-gray-200 transition-colors">
+                                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                            <div class="space-y-2.5">
+                                                <div class="flex items-center gap-3 flex-wrap">
+                                                    <span class="text-sm font-medium text-gray-900">#<?= $order['no_tracking'] ?></span>
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                                        <?= $order['status'] == 0 ? 'bg-amber-50 text-amber-700' : 
+                                                           ($order['status'] == 1 ? 'bg-blue-50 text-blue-700' : 'bg-emerald-50 text-emerald-700') ?>">
+                                                        <?= $order['status'] == 0 ? 'Menunggu Pembayaran' : 
+                                                           ($order['status'] == 1 ? 'Diproses' : 'Selesai') ?>
+                                                    </span>
+                                                </div>
+                                                <p class="text-sm text-gray-500"><?= date("d M Y, H:i", strtotime($order['created_at'])) ?></p>
+                                                <p class="text-base font-semibold text-gray-900">
+                                                    Rp <?= number_format($order['total_harga'], 0,',','.') ?>
+                                                </p>
+                                            </div>
+
+                                            <a href="order-details.php?t=<?= urlencode($order['no_tracking']) ?>"
+                                               class="inline-flex items-center justify-center px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors">
+                                                Lihat Detail
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="text-center py-12">
+                                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                                <p class="text-base text-gray-500 mb-4">Belum ada pesanan</p>
+                                <a href="index.php" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-700 transition-colors">
+                                    Mulai Belanja
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
-        <?php endif; ?>
+
+        </div>
     </div>
 </div>
 
