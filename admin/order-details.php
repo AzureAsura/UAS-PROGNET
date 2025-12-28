@@ -27,6 +27,7 @@ if (isset($_GET['t'])) {
 $data = mysqli_fetch_array($orderData);
 
 
+
 ?>
 
     <?php include('template/sidebar.php')?>
@@ -77,7 +78,7 @@ $data = mysqli_fetch_array($orderData);
                             oi.qty as orderqty,
                             p.*
                         FROM tb_orders o
-                        INNER JOIN order_items oi ON oi.id_order = o.id_order
+                        INNER JOIN tb_order_items oi ON oi.id_order = o.id_order
                         INNER JOIN tb_produk p ON p.id_produk = oi.id_produk
                         AND o.no_tracking = '$tracking_no'
                     ";
@@ -125,9 +126,11 @@ $data = mysqli_fetch_array($orderData);
                     <span class="font-semibold">
                             <input type="hidden" name="no_tracking" value="<?= $data['no_tracking'] ?>">
                             <select name="order_status" id="">
-                                <option value="0" <?= $data['status'] == 0?"selected":"" ?>>Under Process</option>
-                                <option value="1" <?= $data['status'] == 1?"selected":"" ?>>Completed</option>
-                                <option value="2" <?= $data['status'] == 2?"selected":"" ?>>Canceled</option>
+                                <option value="0" <?= $data['status'] == 0?"selected":"" ?>>Menunggu Pembayaran</option>
+                                <option value="1" <?= $data['status'] == 1?"selected":"" ?>>Pembayaran Terverifikasi</option>
+                                <option value="2" <?= $data['status'] == 2?"selected":"" ?>>Produk Dikirim</option>
+                                <option value="3" <?= $data['status'] == 3?"selected":"" ?>>Terkirim</option>
+                                <option value="4" <?= $data['status'] == 4?"selected":"" ?>>Dibatalkan</option>
                             </select>
 
                         </span>

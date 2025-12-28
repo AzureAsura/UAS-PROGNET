@@ -3,12 +3,13 @@
 include('../config/db-config.php');
 
 
-    function getOrders(){
-        global $con;
-        $query = "SELECT * FROM tb_orders WHERE status='0'";
-
-        return mysqli_query($con, $query);
-    }
+function getOrders() {
+    global $con;
+    $query = "SELECT * FROM tb_orders 
+              WHERE status = 0
+              ORDER BY created_at DESC";
+    return mysqli_query($con, $query);
+}
 
     // function checkTrackingNoValidAdmin($trackingNo){
     //     global $con;
@@ -37,13 +38,25 @@ function checkTrackingNoValidAdmin($trackingNo) {
     return mysqli_query($con, $query);
 }
 
+function getOrderOnGoing() {
+    global $con;
+    
+    $query = "SELECT * FROM tb_orders 
+              WHERE status = 1 OR status = 2
+              ORDER BY created_at DESC";
 
-    function getOrderHistory(){
-        global $con;
-        $query = "SELECT * FROM tb_orders WHERE status != '0'";
+    return mysqli_query($con, $query);
+}
 
-        return mysqli_query($con, $query);
-    }
+function getOrderHistory() {
+    global $con;
+    
+    $query = "SELECT * FROM tb_orders 
+              WHERE status = 3 OR status = 4
+              ORDER BY created_at DESC";
+
+    return mysqli_query($con, $query);
+}
 
     function getAll($table){
         global $con;

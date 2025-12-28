@@ -208,6 +208,7 @@ if (isset($_POST['add_category_btn'])) {
     } else {
         redirect("products.php", "Something went wrong");
     }
+    
 } elseif (isset($_POST['update_status_btn'])) {
     $track_no = $_POST['no_tracking'];
     $order_status = $_POST['order_status'];

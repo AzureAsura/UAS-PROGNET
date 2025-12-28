@@ -13,7 +13,9 @@ if (!isset($_SESSION['auth'])) {
 $userId = $_SESSION['auth_user']['id_user'];
 
 $profile = getProfile();        
-$orders  = getOrders();         
+$orders  = getOrders();    
+
+
 ?>
 
 <div class=" pt-24 pb-10">
@@ -92,17 +94,36 @@ $orders  = getOrders();
 
                         <?php if (!empty($orders)): ?>
                             <div class="space-y-4">
-                                <?php foreach ($orders as $order): ?>
+                                <?php foreach ($orders as $order): 
+                                $statusLabels = [
+                                    0 => 'Menunggu Pembayaran',
+                                    1 => 'Pembayaran Terverifikasi',
+                                    2 => 'Produk Dikirim',
+                                    3 => 'Terkirim',
+                                    4 => 'Dibatalkan'
+                                ];
+
+                                $statusColors = [
+                                    0 => 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20',
+                                    1 => 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20',
+                                    2 => 'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20',
+                                    3 => 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20',
+                                    4 => 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20'
+                                ];
+
+                                $status = $order['status'] ?? -1;
+                                $label = $statusLabels[$status] ?? 'Status Tidak Dikenal';
+                                $color = $statusColors[$status] ?? 'bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-600/20';
+                                    
+                                    
+                                    ?>
                                     <div class="border border-gray-100 rounded-xl p-5 hover:border-gray-200 transition-colors">
                                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                             <div class="space-y-2.5">
                                                 <div class="flex items-center gap-3 flex-wrap">
                                                     <span class="text-sm font-medium text-gray-900">#<?= $order['no_tracking'] ?></span>
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                        <?= $order['status'] == 0 ? 'bg-amber-50 text-amber-700' : 
-                                                           ($order['status'] == 1 ? 'bg-blue-50 text-blue-700' : 'bg-emerald-50 text-emerald-700') ?>">
-                                                        <?= $order['status'] == 0 ? 'Menunggu Pembayaran' : 
-                                                           ($order['status'] == 1 ? 'Diproses' : 'Selesai') ?>
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <?= $color ?>">
+                                                        <?= htmlspecialchars($label) ?>
                                                     </span>
                                                 </div>
                                                 <p class="text-sm text-gray-500"><?= date("d M Y, H:i", strtotime($order['created_at'])) ?></p>

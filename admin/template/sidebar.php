@@ -10,6 +10,7 @@
     <a href="add-product.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Add Product</a>
     <a href="products.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Products</a>
     <a href="orders.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Orders</a>
+    <a href="order-on-going.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Order on going</a>
     <a href="order-history.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Orders History</a>
   </nav>
 

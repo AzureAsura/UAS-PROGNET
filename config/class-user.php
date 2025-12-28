@@ -362,7 +362,7 @@ public function getOrderByTracking($tracking_no, $userId) {
                     p.id_produk, 
                     p.nama_produk, 
                     p.gambar
-                  FROM order_items oi
+                  FROM tb_order_items oi
                   JOIN tb_orders o ON oi.id_order = o.id_order
                   JOIN tb_produk p ON p.id_produk = oi.id_produk
                   WHERE o.no_tracking = ? AND o.id_user = ?
