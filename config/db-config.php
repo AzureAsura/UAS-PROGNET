@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 if (!class_exists('Database')) {
 
     class Database {
-        private $host = "localhost:3307";
+        private $host = "localhost";
         private $username = "root";
         private $password = "";
         private $database = "db_ecom";

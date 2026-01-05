@@ -1,34 +1,39 @@
 <?php
-
 include('../config/db-config.php');
 
+/* =====================
+   ORDERS
+===================== */
 
 function getOrders() {
     global $con;
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 0
+              WHERE status = 1
               ORDER BY created_at DESC";
     return mysqli_query($con, $query);
 }
 
+/* =====================
+   STATISTIK
+===================== */
+
 function getStatistik() {
     global $con;
-    $query = "SELECT SUM(total_harga) AS tharga FROM tb_orders WHERE status = 3";
+    $query = "SELECT SUM(total_harga) AS tharga 
+              FROM tb_orders 
+              WHERE status = 1";
     return mysqli_query($con, $query);
 }
 
-    // function checkTrackingNoValidAdmin($trackingNo){
-    //     global $con;
-    //     $query = "SELECT * FROM tb_orders WHERE no_tracking='$trackingNo'";
-    //     return mysqli_query($con, $query);
-
-    // }
+/* =====================
+   ORDER DETAIL
+===================== */
 
 function checkTrackingNoValidAdmin($trackingNo) {
     global $con;
-    
+
     $trackingNo = mysqli_real_escape_string($con, $trackingNo);
-    
+
     $query = "
         SELECT 
             o.*,
@@ -36,46 +41,45 @@ function checkTrackingNoValidAdmin($trackingNo) {
             a.kota,
             a.provinsi
         FROM tb_orders o
-        JOIN tb_alamat a ON o.alamat = a.id_alamat
+        LEFT JOIN tb_alamat a ON o.alamat = a.id_alamat
         WHERE o.no_tracking = '$trackingNo'
         LIMIT 1
     ";
-    
+
     return mysqli_query($con, $query);
 }
 
+/* =====================
+   DASHBOARD DATA
+===================== */
+
 function getOrderOnGoing() {
     global $con;
-    
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 1 OR status = 2
+              WHERE status = 0 OR status = 1
               ORDER BY created_at DESC";
-
     return mysqli_query($con, $query);
 }
 
 function getOrderHistory() {
     global $con;
-    
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 3 OR status = 4
+              WHERE status = 2 OR status = 3
               ORDER BY created_at DESC";
-
     return mysqli_query($con, $query);
 }
 
-    function getAll($table){
-        global $con;
-        $query = "SELECT * FROM $table";
-        return $query_run = mysqli_query($con, $query);
-    }
+/* =====================
+   GENERAL
+===================== */
 
-    // Function fetch data by id
-    function getById($table, $id, $column){
-        global $con;
-        $query = "SELECT * FROM $table WHERE $column = '$id'";
-        return $query_run = mysqli_query($con, $query);
-    }
+function getAll($table) {
+    global $con;
+    return mysqli_query($con, "SELECT * FROM $table");
+}
 
-
-?>
+function getById($table, $id, $column) {
+    global $con;
+    $id = mysqli_real_escape_string($con, $id);
+    return mysqli_query($con, "SELECT * FROM $table WHERE $column = '$id'");
+}
