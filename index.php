@@ -118,7 +118,7 @@ $user = new User();
     <div class='flex flex-col items-center mt-24'>
         <h2 class='text-2xl font-semibold text-slate-800'>Trending Products</h2>
         <a href="trending.php" class='flex items-center gap-5 text-sm text-slate-600 mt-2'>
-            <p class='max-w-lg text-center'>Showing 4 of 12 products</p>
+            <p class='max-w-lg text-center'>Showing 8 of 20 products</p>
             <button class='text-green-500 flex items-center gap-1'>View more
                 <i class="ri-arrow-right-line flex items"></i>
             </button>

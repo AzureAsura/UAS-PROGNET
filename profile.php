@@ -96,7 +96,7 @@ $orders  = getOrders();
                             <div class="space-y-4">
                                 <?php foreach ($orders as $order): 
                                 $statusLabels = [
-                                    0 => 'Menunggu Pembayaran',
+                                    0 => 'Pesanan Dibuat',
                                     1 => 'Pembayaran Terverifikasi',
                                     2 => 'Produk Dikirim',
                                     3 => 'Terkirim',
@@ -121,11 +121,29 @@ $orders  = getOrders();
                                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                             <div class="space-y-2.5">
                                                 <div class="flex items-center gap-3 flex-wrap">
-                                                    <span class="text-sm font-medium text-gray-900">#<?= $order['no_tracking'] ?></span>
+                                                    <!-- ORDER STATUS -->
+                                                    <span class="text-sm font-medium text-gray-900">
+                                                        #<?= $order['no_tracking'] ?>
+                                                    </span>
+
                                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <?= $color ?>">
                                                         <?= htmlspecialchars($label) ?>
                                                     </span>
+
+                                                    <!-- PAYMENT STATUS -->
+                                                    <?php if (empty($order['paid_order_id'])): ?>
+                                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                                                    bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20">
+                                                            Menunggu Pembayaran
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                                                    bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+                                                            Sudah Dibayar
+                                                        </span>
+                                                    <?php endif; ?>
                                                 </div>
+
                                                 <p class="text-sm text-gray-500"><?= date("d M Y, H:i", strtotime($order['created_at'])) ?></p>
                                                 <p class="text-base font-semibold text-gray-900">
                                                     Rp <?= number_format($order['total_harga'], 0,',','.') ?>

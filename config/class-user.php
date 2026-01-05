@@ -56,6 +56,77 @@ class User extends Database {
         return $data;
     }
 
+public function getAllProducts(){
+    $query = "SELECT * FROM tb_produk ORDER BY created_at DESC";
+    $stmt = $this->conn->prepare($query);
+
+    if(!$stmt){
+        return [];
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $products = [];
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $products[] = $row;
+        }
+    }
+
+    $stmt->close();
+    return $products;
+}
+
+public function searchProducts($keyword){
+    $query = "
+        SELECT p.*, k.nama_kategori,
+        CASE
+            WHEN p.nama_produk LIKE ? THEN 1
+            WHEN k.nama_kategori LIKE ? THEN 2
+            ELSE 3
+        END AS relevance
+        FROM tb_produk p
+        LEFT JOIN tb_kategori k 
+            ON p.id_kategori = k.id_kategori
+        WHERE p.nama_produk LIKE ?
+           OR k.nama_kategori LIKE ?
+        ORDER BY relevance, p.created_at DESC
+    ";
+
+    $stmt = $this->conn->prepare($query);
+
+    if(!$stmt){
+        return [];
+    }
+
+    $keyword = trim($keyword);
+    $keyword = "%" . $keyword . "%";
+
+    $stmt->bind_param(
+        "ssss",
+        $keyword, // ranking nama_produk
+        $keyword, // ranking nama_kategori
+        $keyword, // where nama_produk
+        $keyword  // where nama_kategori
+    );
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $products = [];
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $products[] = $row;
+        }
+    }
+
+    $stmt->close();
+    return $products;
+}
+
+
+
     // Method untuk get produk by category
     public function getProductByCategory($categoryId){
         $query = "SELECT * FROM tb_produk WHERE id_kategori = ? AND status = '0' ORDER BY id_produk DESC";
@@ -117,28 +188,60 @@ class User extends Database {
     }
 
     // Method untuk get orders user
-    public function getOrders($userId){
-        $query = "SELECT * FROM tb_orders WHERE id_user = ? ORDER BY id_order DESC";
-        $stmt = $this->conn->prepare($query);
+    // public function getOrders($userId){
+    //     $query = "SELECT * FROM tb_orders WHERE id_user = ? ORDER BY id_order DESC";
+    //     $stmt = $this->conn->prepare($query);
         
-        if(!$stmt){
-            return [];
-        }
+    //     if(!$stmt){
+    //         return [];
+    //     }
 
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    //     $stmt->bind_param("i", $userId);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
         
-        $orders = [];
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
-                $orders[] = $row;
-            }
-        }
+    //     $orders = [];
+    //     if($result->num_rows > 0){
+    //         while($row = $result->fetch_assoc()){
+    //             $orders[] = $row;
+    //         }
+    //     }
         
-        $stmt->close();
-        return $orders;
+    //     $stmt->close();
+    //     return $orders;
+    // }
+
+    public function getOrders($userId){
+    $query = "
+        SELECT o.*,
+               p.id_order AS paid_order_id
+        FROM tb_orders o
+        LEFT JOIN tb_payment p
+            ON o.id_order = p.id_order
+        WHERE o.id_user = ?
+        ORDER BY o.id_order DESC
+    ";
+
+    $stmt = $this->conn->prepare($query);
+    if(!$stmt){
+        return [];
     }
+
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $orders = [];
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $orders[] = $row;
+        }
+    }
+
+    $stmt->close();
+    return $orders;
+}
+
 
     // Method untuk get profile user
     public function getProfile($userId){
