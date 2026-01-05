@@ -9,7 +9,7 @@ if (isset($_SESSION['auth'])) {
     $_SESSION['message'] = "Logout Successfully";
 
 }
-
+session_destroy();
 header('Location: index.php');
 
 ?>

@@ -10,13 +10,13 @@ $user = new User();
 
     <div class=''>
         <div class='flex max-xl:flex-col gap-8  mx-auto my-10'>
-            <div class='relative flex-1 flex flex-col bg-green-200 rounded-3xl xl:min-h-100 group'>
+            <div class='relative flex-1 flex flex-col bg-slate-300 rounded-3xl xl:min-h-100 group'>
                 <div class='p-5 sm:p-16'>
-                    <div class='inline-flex items-center gap-3 bg-green-300 text-green-600 pr-4 p-1 rounded-full text-xs sm:text-sm'>
-                        <span class='bg-green-600 px-3 py-1 max-sm:ml-1 rounded-full text-white text-xs'>NEWS</span> Free Shipping on Orders Above $50!
+                    <div class='inline-flex items-center gap-3 bg-slate-500 text-slate-900 pr-4 p-1 rounded-full text-xs sm:text-sm'>
+                        <span class='bg-slate-700 px-3 py-1 max-sm:ml-1 rounded-full text-white text-xs'>NEWS</span> Free Shipping on Orders Above $50!
                         <ChevronRightIcon class='group-hover:ml-2 transition-all' size={16} />
                     </div>
-                    <h2 class='text-3xl sm:text-5xl leading-[1.2] my-3 font-medium bg-gradient-to-r from-slate-600 to-[#A0FF74] bg-clip-text text-transparent max-w-xs  sm:max-w-md'>
+                    <h2 class='text-3xl sm:text-5xl leading-[1.2] my-3 font-medium bg-gradient-to-r from-slate-700 to-blue-400 bg-clip-text text-transparent max-w-xs  sm:max-w-md'>
                         Gadgets you'll love. Prices you'll trust.
                     </h2>
                     <div class='text-slate-800 text-sm font-medium mt-4 sm:mt-8'>
@@ -25,12 +25,13 @@ $user = new User();
                     </div>
                     <button class='bg-slate-800 text-white text-sm py-2.5 px-7 sm:py-5 sm:px-12 mt-4 sm:mt-10 rounded-md hover:bg-slate-900 hover:scale-103 active:scale-95 transition'>LEARN MORE</button>
                 </div>
-                <img src="assets/img/hero.png" alt="" class='sm:absolute bottom-0 right-0 md:right-10 w-full sm:max-w-sm'>
+                <img src="assets/img/dina-bg.png" alt="" class='sm:absolute bottom-0 right-0 md:right-10 w-full sm:max-w-sm'>
             </div>
+
             <div class='flex flex-col md:flex-row xl:flex-col gap-5 w-full xl:max-w-sm text-sm text-slate-600'>
-                <div class='flex-1 flex items-center justify-between w-full bg-orange-200 rounded-3xl p-6 px-8 group'>
+                <div class='flex-1 flex items-center justify-between w-full bg-slate-300 rounded-3xl p-6 px-8 group'>
                     <div>
-                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#FFAD51] bg-clip-text text-transparent max-w-40'>Best products</p>
+                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-700  to-blue-400 bg-clip-text text-transparent max-w-40'>Best products</p>
                         <div class="flex items-center gap-1 mt-4">
                             <p>View more
                             </p>
@@ -40,9 +41,9 @@ $user = new User();
                     <img src="assets/img/hero-p-2.png" alt="hero" class="w-32">
 
                 </div>
-                <div class='flex-1 flex items-center justify-between w-full bg-blue-200 rounded-3xl p-6 px-8 group'>
+                <div class='flex-1 flex items-center justify-between w-full bg-slate-300 rounded-3xl p-6 px-8 group'>
                     <div>
-                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#78B2FF] bg-clip-text text-transparent max-w-40'>20% discounts</p>
+                        <p class='text-3xl font-medium bg-gradient-to-r from-slate-700 to-blue-400 bg-clip-text text-transparent max-w-40'>20% discounts</p>
                         <div class="flex items-center gap-1 mt-4">
                             <p>View more
                             </p>
@@ -55,43 +56,64 @@ $user = new User();
         </div>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
-        <?php
+<div class="relative w-fulll mx-auto mt-16">
 
-        $categories = $user->getAllActive('tb_kategori');
-        $countcategories = 1;
-        $maxcategories = 6;
-        if (!empty($categories)) {
-            foreach ($categories as $item) {
-                if ($countcategories > $maxcategories) {
-                    break;
-                } else {
-                    $countcategories++;
+    <!-- SLIDER -->
+    <div class="overflow-hidden">
+        <div id="categoryCarousel"
+            class="flex transition-transform duration-500 ease-out">
+
+            <?php
+            $categories = $user->getAllActive('tb_kategori');
+            if (!empty($categories)) {
+                foreach ($categories as $item) {
+            ?>
+                    <a href="products.php?category=<?= $item['slug'] ?>"
+                        class="min-w-[50%] sm:min-w-[33.333%] md:min-w-[16.666%] px-6 group">
+
+                        <div class="flex flex-col items-center text-center">
+                            <div
+                                class="w-24 h-24 flex items-center justify-center mb-4
+                                transition-transform duration-300 group-hover:scale-105">
+                                <img
+                                    src="uploads/<?= $item['gambar'] ?>"
+                                    alt="<?= $item['nama_kategori'] ?>"
+                                    class="object-contain opacity-90 group-hover:opacity-100">
+                            </div>
+
+                            <h4 class="text-sm font-medium text-gray-900">
+                                <?= $item['nama_kategori'] ?>
+                            </h4>
+
+                            <p class="text-xs text-gray-400 mt-1 leading-relaxed">
+                                <?= $item['deskripsi'] ?>
+                            </p>
+                        </div>
+                    </a>
+            <?php
                 }
-        ?>
-                <a href="products.php?category=<?= $item['slug'] ?>">
-                    <div class="flex flex-col items-center justify-center">
-                        <img
-                            src="uploads/<?= $item['gambar'] ?>"
-                            alt="<?= $item['nama_kategori'] ?>"
-                            class="w-24 h-24 object-contain mb-3">
-
-                        <h4 class="font-semibold text-gray-900 text-sm">
-                            <?= $item['nama_kategori'] ?>
-                        </h4>
-
-                        <p class="text-gray-500 text-sm">
-                            <?= $item['deskripsi'] ?>
-                        </p>
-                    </div>
-                </a>
-        <?php
             }
-        } else {
-            echo "<p class='text-gray-600 col-span-6 text-center'>No data available</p>";
-        }
-        ?>
+            ?>
+        </div>
     </div>
+
+    <!-- BUTTON -->
+    <button id="prevCat"
+        class="absolute left-0 top-1/2 -translate-y-1/2
+        backdrop-blur-md bg-white/70 text-gray-600
+        w-10 h-10 rounded-full shadow-sm
+        hover:bg-white hover:text-black transition">
+        ❮
+    </button>
+
+    <button id="nextCat"
+        class="absolute right-0 top-1/2 -translate-y-1/2
+        backdrop-blur-md bg-white/70 text-gray-600
+        w-10 h-10 rounded-full shadow-sm
+        hover:bg-white hover:text-black transition">
+        ❯
+    </button>
+</div>
 
     <div class='flex flex-col items-center mt-24'>
         <h2 class='text-2xl font-semibold text-slate-800'>Trending Products</h2>
@@ -102,6 +124,8 @@ $user = new User();
             </button>
         </a>
     </div>
+
+
 
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-14 mt-14">
 

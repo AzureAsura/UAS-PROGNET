@@ -17,6 +17,14 @@
                         <i class="ri-user-line text-2xl"></i>
                     </a>
 
+                    <?php
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+                    ?>
+                    <a href="admin/" class="relative flex items-center gap-2 text-slate-600">
+                        <i class="ri-login-circle-line text-2xl"></i>
+                    </a>
+                    <?php } ?>
+
                 </div>
 
                 <!-- {/* Mobile User Button  */} -->
@@ -28,6 +36,13 @@
                     <a href="profile.php" class="relative flex items-center gap-2 text-slate-600">
                         <i class="ri-user-line text-xl"></i>
                     </a>
+                    <?php
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+                    ?>
+                    <a href="admin/" class="relative flex items-center gap-2 text-slate-600">
+                        <i class="ri-login-circle-line text-xl"></i>
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
         </div>

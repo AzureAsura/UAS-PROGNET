@@ -117,7 +117,7 @@ include("includes/header.php")
     <!-- RIGHT : IMAGE -->
     <div class="hidden md:block relative">
       <img 
-        src="assets/img/register.jpg"
+        src="assets/img/dina.png"
         alt="Register Illustration"
         class="w-full h-full object-cover"
       />

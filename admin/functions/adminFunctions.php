@@ -11,6 +11,12 @@ function getOrders() {
     return mysqli_query($con, $query);
 }
 
+function getStatistik() {
+    global $con;
+    $query = "SELECT SUM(total_harga) AS tharga FROM tb_orders WHERE status = 3";
+    return mysqli_query($con, $query);
+}
+
     // function checkTrackingNoValidAdmin($trackingNo){
     //     global $con;
     //     $query = "SELECT * FROM tb_orders WHERE no_tracking='$trackingNo'";
