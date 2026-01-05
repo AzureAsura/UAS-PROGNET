@@ -8,7 +8,7 @@ include('../config/db-config.php');
 function getOrders() {
     global $con;
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 1
+              WHERE status = 0
               ORDER BY created_at DESC";
     return mysqli_query($con, $query);
 }
@@ -56,7 +56,7 @@ function checkTrackingNoValidAdmin($trackingNo) {
 function getOrderOnGoing() {
     global $con;
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 0 OR status = 1
+              WHERE status = 1 OR status = 2
               ORDER BY created_at DESC";
     return mysqli_query($con, $query);
 }
@@ -64,7 +64,7 @@ function getOrderOnGoing() {
 function getOrderHistory() {
     global $con;
     $query = "SELECT * FROM tb_orders 
-              WHERE status = 2 OR status = 3
+              WHERE status = 3 OR status = 4
               ORDER BY created_at DESC";
     return mysqli_query($con, $query);
 }

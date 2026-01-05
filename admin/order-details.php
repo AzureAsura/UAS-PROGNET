@@ -26,7 +26,10 @@ if (isset($_GET['t'])) {
 
 $data = mysqli_fetch_array($orderData);
 
-
+// Ambil data payment
+require_once "../config/class-payment.php";
+$paymentObj = new Payment();
+$payment = $paymentObj->getPaymentByOrder($data['id_order']);
 
 ?>
 
@@ -36,10 +39,10 @@ $data = mysqli_fetch_array($orderData);
     <main class="flex-1 p-8 md:pt-8 pt-24">
       <h1 class="text-4xl font-bold text-[#3C3F58] mb-2">Welcome, Human</h1>
       <p class="text-[#707793]">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, explicabo!
+        Selamat datang di dashboard Admin!
       </p>
 
-    <h2 class="text-3xl font-bold text-gray-800 mb-10">Order Details</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 pt-8">Order Details</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -52,11 +55,11 @@ $data = mysqli_fetch_array($orderData);
                 <p><span class="font-medium text-gray-600">Email:</span> <?= $data['email'] ?></p>
                 <p><span class="font-medium text-gray-600">No Telp:</span> <?= $data['no_telp'] ?></p>
                 <p><span class="font-medium text-gray-600">Tracking No:</span> <?= $data['no_tracking'] ?></p>
-                        <span class="text-gray-700">
+                        <p><span class="font-medium text-gray-700">
                             <?= htmlspecialchars($data['alamat_lengkap']) ?><br>
                             <?= htmlspecialchars($data['kota']) ?>, <?= htmlspecialchars($data['provinsi']) ?><br>
                             Kode Pos: <?= htmlspecialchars($data['pincode']) ?>
-                        </span>
+                        </span></p>
             </div>
         </div>
 
@@ -113,19 +116,64 @@ $data = mysqli_fetch_array($orderData);
                 </p>
             </div>
 
-            <!-- PAYMENT INFO -->
+            <!-- BUKTI PEMBAYARAN -->
+            <div class="bg-white shadow-md rounded-xl p-6 border">
+                <h3 class="text-xl font-semibold mb-4">Bukti Pembayaran</h3>
+                
+                <?php if ($payment): ?>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm text-gray-600 font-medium mb-1">Rekening Pengirim</p>
+                            <p class="text-base text-gray-900 font-semibold"><?= htmlspecialchars($payment['rekening']) ?></p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-gray-600 font-medium mb-1">Tanggal Upload</p>
+                            <p class="text-base text-gray-700">
+                                <?= date('d F Y, H:i', strtotime($payment['created_at'] ?? $data['updated_at'] ?? 'now')) ?>
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <p class="text-sm text-gray-600 font-medium mb-2">Bukti Transfer</p>
+                            <?php 
+                            $imagePath = "../uploads/payments/" . htmlspecialchars($payment['bukti_pembayaran']);
+                            if (!empty($payment['bukti_pembayaran']) && file_exists($imagePath)): 
+                            ?>
+                                <a href="<?= $imagePath ?>" target="_blank" class="block">
+                                    <img src="<?= $imagePath ?>" 
+                                         alt="Bukti Pembayaran" 
+                                         class="w-full max-w-sm rounded-lg border-2 border-gray-200 hover:border-blue-400 transition-all cursor-pointer"
+                                         loading="lazy">
+                                </a>
+                                <p class="text-xs text-gray-500 mt-2">Klik gambar untuk melihat ukuran penuh</p>
+                            <?php else: ?>
+                                <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                                    <p class="text-red-600 text-sm font-medium">File tidak ditemukan</p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                        <p class="text-amber-700 text-sm font-medium">
+                            <i class="ri-alert-line"></i> Pelanggan belum mengupload bukti pembayaran
+                        </p>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- PAYMENT INFO & STATUS -->
             <div class="bg-white shadow-md rounded-xl p-6 border space-y-2">
                 <p class="font-medium text-gray-700">Payment Mode: 
                     <span class="font-semibold text-gray-900"><?= $data['payment_mode'] ?></span>
                 </p>
 
                 <form action="code.php" method="POST">
-
-
                     <p class="font-medium text-gray-700">Status:
                     <span class="font-semibold">
                             <input type="hidden" name="no_tracking" value="<?= $data['no_tracking'] ?>">
-                            <select name="order_status" id="">
+                            <select name="order_status" class="border border-gray-300 rounded-lg px-3 py-2 mt-2 w-full">
                                 <option value="0" <?= $data['status'] == 0?"selected":"" ?>>Menunggu Pembayaran</option>
                                 <option value="1" <?= $data['status'] == 1?"selected":"" ?>>Pembayaran Terverifikasi</option>
                                 <option value="2" <?= $data['status'] == 2?"selected":"" ?>>Produk Dikirim</option>
@@ -135,7 +183,9 @@ $data = mysqli_fetch_array($orderData);
 
                         </span>
                     </p>
-                    <button type="submit" name="update_status_btn" class="p-3 bg-blue-300 rounded-xl mt-3">Update Status</button>
+                    <button type="submit" name="update_status_btn" class="p-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl mt-3 w-full transition-colors">
+                        Update Status
+                    </button>
                 </form>
             </div>
 
@@ -144,14 +194,4 @@ $data = mysqli_fetch_array($orderData);
     </div>
     </main>
 
-
-
-
   <?php include('template/footer.php')?>
-
-
-
-
-
-
-

@@ -44,28 +44,28 @@ function labelStatus($status) {
     <!-- SUMMARY -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
 
-        <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <div class="bg-blue-300 p-6 rounded-xl border shadow-sm">
             <p class="text-sm text-gray-500 font-semibold uppercase">Total Revenue</p>
             <h3 class="text-2xl font-bold mt-2">
                 Rp <?= number_format($revenue, 0, ',', '.') ?>
             </h3>
         </div>
 
-        <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <div class="bg-lime-300 p-6 rounded-xl border shadow-sm">
             <p class="text-sm text-gray-500 font-semibold uppercase">Order Aktif</p>
             <h3 class="text-2xl font-bold mt-2">
                 <?= mysqli_num_rows($orderAktif) ?>
             </h3>
         </div>
 
-        <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <div class="bg-yellow-300 p-6 rounded-xl border shadow-sm">
             <p class="text-sm text-gray-500 font-semibold uppercase">Order Selesai</p>
             <h3 class="text-2xl font-bold mt-2">
                 <?= mysqli_num_rows($orderHistory) ?>
             </h3>
         </div>
 
-        <div class="bg-white p-6 rounded-xl border shadow-sm">
+        <div class="bg-orange-300 p-6 rounded-xl border shadow-sm">
             <p class="text-sm text-gray-500 font-semibold uppercase">Status Sistem</p>
             <h3 class="text-xl font-bold mt-2 text-green-600">Aktif</h3>
         </div>

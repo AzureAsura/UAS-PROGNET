@@ -18,14 +18,14 @@
         <!-- WRAPPER AGAR RESPONSIVE -->
         <div class="overflow-x-auto">
             <table class="min-w-full text-left text-sm">
-                <thead class="bg-gray-100 border-b">
+                <thead class="bg-black border-b">
                     <tr>
-                        <th class="px-6 py-3 font-semibold text-gray-700">ID</th>
-                        <th class="px-6 py-3 font-semibold text-gray-700">Name</th>
-                        <th class="px-6 py-3 font-semibold text-gray-700">Image</th>
-                        <th class="px-6 py-3 font-semibold text-gray-700">Status</th>
-                        <th class="px-6 py-3 font-semibold text-gray-700">Edit</th>
-                        <th class="px-6 py-3 font-semibold text-gray-700">Delete</th>
+                        <th class="px-6 py-3 font-semibold text-white">ID</th>
+                        <th class="px-6 py-3 font-semibold text-white">Name</th>
+                        <th class="px-6 py-3 font-semibold text-white">Image</th>
+                        <th class="px-6 py-3 font-semibold text-white">Status</th>
+                        <th class="px-6 py-3 font-semibold text-white">Edit</th>
+                        <th class="px-6 py-3 font-semibold text-white">Delete</th>
                     </tr>
                 </thead>
 
@@ -36,7 +36,7 @@
                         if(mysqli_num_rows($category) > 0){
                             foreach ($category as $item) {
                     ?>
-                        <tr class="border-b hover:bg-gray-50 transition">
+                        <tr class="border-b hover:bg-gray-100 transition">
                             <td class="px-6 py-4"><?= $item['id_kategori']; ?></td>
                             <td class="px-6 py-4 font-medium"><?= $item['nama_kategori']; ?></td>
                             
