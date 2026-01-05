@@ -43,6 +43,7 @@ $(document).ready(function () {
       dataType: "json",
       success: function (response) {
         if (response.status == 201) {
+          $("#cart-badge-container").load(location.href + " #cart-badge-container > *");
           showToast(response.message);
         } else {
           showToast(response.message);
@@ -88,6 +89,8 @@ $(document).ready(function () {
           showToast(response.message);
           // $('#mycart').load(location.href + " #mycart")
           $("#mycart").load(location.href + " #mycart > *");
+          $("#cart-badge-container").load(location.href + " #cart-badge-container > *");
+          
         } else {
           showToast(response.message);
         }

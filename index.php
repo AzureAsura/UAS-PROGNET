@@ -12,8 +12,8 @@ $user = new User();
         <div class='flex max-xl:flex-col gap-8  mx-auto my-10'>
             <div class='relative flex-1 flex flex-col bg-slate-300 rounded-3xl xl:min-h-100 group'>
                 <div class='p-5 sm:p-16'>
-                    <div class='inline-flex items-center gap-3 bg-slate-500 text-slate-900 pr-4 p-1 rounded-full text-xs sm:text-sm'>
-                        <span class='bg-slate-700 px-3 py-1 max-sm:ml-1 rounded-full text-white text-xs'>NEWS</span> Free Shipping on Orders Above $50!
+                    <div class='inline-flex items-center gap-3 bg-slate-400 text-slate-900 pr-4 p-1 rounded-full text-xs sm:text-sm'>
+                        <span class='bg-slate-600 px-3 py-1 max-sm:ml-1 rounded-full text-white text-xs'>NEWS</span> Free Shipping on Orders Above $50!
                         <ChevronRightIcon class='group-hover:ml-2 transition-all' size={16} />
                     </div>
                     <h2 class='text-3xl sm:text-5xl leading-[1.2] my-3 font-medium bg-gradient-to-r from-slate-700 to-blue-400 bg-clip-text text-transparent max-w-xs  sm:max-w-md'>
@@ -23,7 +23,10 @@ $user = new User();
                         <p>Starts from</p>
                         <p class='text-3xl'>Rp. 10.000.000</p>
                     </div>
-                    <button class='bg-slate-800 text-white text-sm py-2.5 px-7 sm:py-5 sm:px-12 mt-4 sm:mt-10 rounded-md hover:bg-slate-900 hover:scale-103 active:scale-95 transition'>LEARN MORE</button>
+                    <a href="https://aldyne-landing-page.vercel.app/">
+
+                        <button class='bg-slate-800 text-white text-sm py-2.5 px-7 sm:py-5 sm:px-12 mt-4 sm:mt-10 rounded-md hover:bg-slate-900 hover:scale-103 active:scale-95 transition'>LEARN MORE</button>
+                    </a>
                 </div>
                 <img src="assets/img/dina-bg.png" alt="" class='sm:absolute bottom-0 right-0 md:right-10 w-full sm:max-w-sm'>
             </div>

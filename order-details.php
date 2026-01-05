@@ -53,7 +53,7 @@ if (!$order) {
                 <?php if ($order['status'] == 0): ?>
                     <span class="inline-flex items-center px-6 py-2.5 rounded-full text-sm font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                         <i class="ri ri-time-line text-base mr-2"></i>
-                        Menunggu Pembayaran
+                        Pesanan Dibuat
                     </span>
 
                 <?php elseif ($order['status'] == 1): ?>
