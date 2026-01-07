@@ -1,16 +1,9 @@
-<?php include('../middleware/adminMiddleware.php') ?>
+<?php 
+include('../middleware/staffMiddleware.php');  // ← Ini cukup untuk role 1 & 2
+?>
 <?php include('functions/adminFunctions.php') ?>
 <?php include('template/header.php');?>
-<?php
-// LOAD MODEL
-include('../admin/app/Model/order_model.php');
 
-// INIT MODEL
-$orderModel = new OrderModel($con);
-
-// GET DATA
-$orders = $orderModel->getOrders();
-?>
     <!-- SIDEBAR -->
     <?php include('template/sidebar.php')?>
 
@@ -22,7 +15,7 @@ $orders = $orderModel->getOrders();
       </div>
 
         <?php
-            $orders = $orderModel->getOrders();
+            $orders = getOrders();
 
             if (mysqli_num_rows($orders) > 0) {
         ?>

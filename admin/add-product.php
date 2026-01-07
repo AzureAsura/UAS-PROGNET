@@ -3,149 +3,288 @@
 <?php include('template/header.php') ?>
 <?php include('template/sidebar.php') ?>
 
+<main class="p-4 md:p-8 md:pt-8 pt-20 flex-1  min-h-screen">
 
-<main class="w-full min-h-screen p-3 sm:p-6 lg:p-8 pt-20 sm:pt-24 md:pt-8">
-    <div class="w-full max-w-4xl mx-auto">
+    <div class=" mx-auto">
         
-        <div class="mb-4 sm:mb-6">
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-1">Add Product</h1>
-            <p class="text-xs sm:text-sm text-gray-500">Isi form di bawah untuk menambahkan produk baru</p>
+        <!-- Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-800">Tambah Produk</h1>
+            <p class="text-slate-600 text-sm mt-1">Buat produk baru untuk toko Anda</p>
         </div>
 
-        <form action="code.php" method="POST" enctype="multipart/form-data" 
-              class="w-full bg-white border border-gray-200 rounded-lg p-3 sm:p-5 md:p-6 space-y-4 sm:space-y-5">
+        <!-- Form Card -->
+        <div class="bg-white rounded-lg shadow-sm border border-slate-200">
+            <form action="proses/proses-product.php" method="POST" enctype="multipart/form-data" class="p-4 md:p-6">
 
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Product Name</label>
-                <input type="text" name="nama_produk" placeholder="Enter product name" required
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-            </div>
-
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Slug</label>
-                <input type="text" name="slug" placeholder="product-slug" required
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-            </div>
-
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Headline</label>
-                <textarea rows="2" name="headline" placeholder="Short product headline..." required
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition resize-none"></textarea>
-            </div>
-
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Description</label>
-                <textarea rows="4" name="deskripsi" placeholder="Full product description..." required
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition resize-none"></textarea>
-            </div>
-
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
-                <div class="w-full">
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Original Price</label>
-                    <input type="text" name="harga_asli" placeholder="100000" required
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                </div>
-
-                <div class="w-full">
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Selling Price</label>
-                    <input type="text" name="harga_jual" placeholder="80000" required
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                </div>
-
-                <div class="w-full">
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Quantity</label>
-                    <input type="text" name="qty" placeholder="50" required
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                </div>
-            </div>
-
-           <div class="w-full">
-            <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Category</label>
-            <select name="kategori_id" required class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-            <option value="">Select Category</option>
-            <?php
-            try {
-                require_once 'app/Model/category_model.php';
-                require_once 'config/db-config.php';
-                
-                $db = Database::getInstance()->getConnection();
-                
-                if (!$db) {
-                    echo '<option value="">Database connection failed</option>';
-                } else {
-                    $categoryModel = new CategoryModel($db);
-                    $categoriesResult = $categoryModel->getAll();
+                <div class="space-y-5">
                     
-                    if (!$categoriesResult) {
-                        echo '<option value="">Query failed: ' . mysqli_error($db) . '</option>';
-                    } else {
-                        $count = 0;
-                        while ($category = mysqli_fetch_assoc($categoriesResult)) {
-                            $count++;
-                            echo '<option value="' . $category['id_kategori'] . '">' 
-                                . htmlspecialchars($category['nama_kategori']) 
-                                . '</option>';
-                        }
+                    <!-- Basic Information Section -->
+                    <div class="pb-4 border-b border-slate-200">
+                        <h2 class="text-lg font-semibold text-slate-800 mb-4">Informasi Dasar</h2>
                         
-                        if ($count == 0) {
-                            echo '<option value="">No categories found in database</option>';
-                        }
-                    }
-                }
-            } catch (Exception $e) {
-                echo '<option value="">Error: ' . $e->getMessage() . '</option>';
-            }
-            ?>
-            </select>
+                        <div class="space-y-4">
+                            <!-- NAME -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Nama Produk <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="nama_produk" 
+                                    placeholder="Nama Produk"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+
+                            <!-- SLUG -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Slug <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="slug" 
+                                    placeholder="Contoh: 14-inch-MacBook-Pro-M4"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+
+                            <!-- HEADLINE -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Headline <span class="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    rows="3" 
+                                    name="headline" 
+                                    placeholder="Headline menarik untuk produk..."
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition resize-none"
+                                ></textarea>
+                            </div>
+
+                            <!-- DESCRIPTION -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Deskripsi <span class="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    rows="4" 
+                                    name="deskripsi" 
+                                    placeholder="Deskripsi detail produk..."
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition resize-none"
+                                ></textarea>
+                            </div>
+
+                            <!-- CATEGORY -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Kategori <span class="text-red-500">*</span>
+                                </label>
+                                <select 
+                                    name="id_kategori" 
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm bg-white focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                                    <option value="">Pilih Kategori</option>
+                                    <?php
+                                    $categories = getAll("tb_kategori");
+
+                                    if (mysqli_num_rows($categories) > 0) {
+                                        foreach ($categories as $item) {
+                                    ?>
+                                            <option value="<?= $item['id_kategori'] ?>"><?= $item['nama_kategori'] ?></option>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "<option>Kategori tidak tersedia</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <!-- IMAGE -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Gambar Produk <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="file" 
+                                    name="gambar" 
+                                    required
+                                    accept="image/*"
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm bg-white file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
+                                    multiple
+                                >
+                                <p class="text-xs text-slate-500 mt-1">Rekomendasi: 800x800px, format JPG/PNG, maks 2MB per file</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing & Stock Section -->
+                    <div class="pb-4 border-b border-slate-200">
+                        <h2 class="text-lg font-semibold text-slate-800 mb-4">Harga & Stok</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- ORIGINAL PRICE -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Harga Asli <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="harga_asli" 
+                                    placeholder="150000"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+
+                            <!-- SELLING PRICE -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Harga Jual <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="harga_jual" 
+                                    placeholder="135000"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+
+                            <!-- QUANTITY -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Stok <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="qty" 
+                                    placeholder="100"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO Section -->
+                    <div class="pb-4 border-b border-slate-200">
+                        <h2 class="text-lg font-semibold text-slate-800 mb-4">Pengaturan SEO</h2>
+                        
+                        <div class="space-y-4">
+                            <!-- META TITLE -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Meta Title <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="meta_title" 
+                                    placeholder="Judul SEO untuk mesin pencari"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                            </div>
+
+                            <!-- META DESCRIPTION -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Meta Description <span class="text-red-500">*</span>
+                                </label>
+                                <textarea 
+                                    rows="2" 
+                                    name="meta_description" 
+                                    placeholder="Deskripsi singkat untuk hasil pencarian"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition resize-none"
+                                ></textarea>
+                                <p class="text-xs text-slate-500 mt-1">Rekomendasi: 150-160 karakter</p>
+                            </div>
+
+                            <!-- META KEYWORDS -->
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1.5">
+                                    Meta Keywords <span class="text-red-500">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    name="meta_keywords" 
+                                    placeholder="kata-kunci1, kata-kunci2, kata-kunci3"
+                                    required
+                                    class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
+                                >
+                                <p class="text-xs text-slate-500 mt-1">Pisahkan kata kunci dengan koma</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Section -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-slate-800 mb-4">Pengaturan</h2>
+                        
+                        <div class="space-y-3">
+                            <!-- STATUS -->
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                <input 
+                                    type="checkbox" 
+                                    name="status"
+                                    id="status"
+                                    class="w-4 h-4 text-slate-600 rounded border-slate-300 focus:ring-2 focus:ring-slate-400 cursor-pointer"
+                                >
+                                <label for="status" class="text-sm font-medium text-slate-700 cursor-pointer flex-1">
+                                    Status Kosong
+                                    <span class="block text-xs text-slate-500 font-normal mt-0.5">Tandai produk ini sebagai kosong/tidak tersedia</span>
+                                </label>
+                            </div>
+
+                            <!-- POPULAR -->
+                            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                <input 
+                                    type="checkbox" 
+                                    name="popularitas"
+                                    id="popularitas"
+                                    class="w-4 h-4 text-slate-600 rounded border-slate-300 focus:ring-2 focus:ring-slate-400 cursor-pointer"
+                                >
+                                <label for="popularitas" class="text-sm font-medium text-slate-700 cursor-pointer flex-1">
+                                    Produk Populer
+                                    <span class="block text-xs text-slate-500 font-normal mt-0.5">Tampilkan di bagian produk populer</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col-reverse sm:flex-row gap-3 mt-6 pt-6 border-t border-slate-200">
+                    <button 
+                        type="button"
+                        onclick="window.history.back()"
+                        class="w-full sm:w-auto px-6 py-2.5 border border-slate-300 text-slate-700 font-medium text-sm rounded-lg hover:bg-slate-50 transition"
+                    >
+                        Batal
+                    </button>
+                    <button 
+                        type="submit"
+                        name="add_product_btn"
+                        class="w-full sm:flex-1 bg-slate-800 text-white font-medium py-2.5 px-6 text-sm rounded-lg hover:bg-slate-700 transition shadow-sm"
+                    >
+                        Tambah Produk
+                    </button>
+                </div>
+
+            </form>
         </div>
 
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Upload Image</label>
-                <input type="file" name="gambar" accept="image/*" required
-                    class="w-full border border-gray-300 rounded-md px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm file:mr-2 sm:file:mr-3 file:py-1 sm:file:py-1.5 file:px-2 sm:file:px-3 file:rounded file:border-0 file:text-xs sm:file:text-sm file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 transition">
-            </div>
-
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <div class="w-full">
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Meta Title</label>
-                    <input type="text" name="meta_title" placeholder="SEO Title" required
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                </div>
-
-                <div class="w-full">
-                    <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Meta Keywords</label>
-                    <input type="text" name="meta_keywords" placeholder="keyword1, keyword2" required
-                        class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
-                </div>
-            </div>
-
-            <div class="w-full">
-                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-1.5">Meta Description</label>
-                <textarea rows="2" name="meta_description" placeholder="SEO description..." required
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 sm:py-2.5 text-xs sm:text-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none transition resize-none"></textarea>
-            </div>
-
-            <div class="w-full flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" name="status" class="w-4 h-4 border-gray-300 rounded text-blue-600 focus:ring-1 focus:ring-blue-500">
-                    <span class="text-xs sm:text-sm text-gray-700">Empty</span>
-                </label>
-
-                <label class="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" name="popularitas" class="w-4 h-4 border-gray-300 rounded text-blue-600 focus:ring-1 focus:ring-blue-500">
-                    <span class="text-xs sm:text-sm text-gray-700">Popular</span>
-                </label>
-            </div>
-
-            <div class="w-full border-t border-gray-200 pt-4 sm:pt-5 mt-4 sm:mt-6">
-                <button type="submit" name="add_product_btn"
-                    class="w-full sm:w-auto px-5 sm:px-6 py-2 sm:py-2.5 bg-blue-600 text-white text-xs sm:text-sm font-medium rounded-md hover:bg-blue-700 transition">
-                    Submit Product
-                </button>
-            </div>
-
-        </form>
     </div>
+
 </main>
 
 <?php include('template/footer.php') ?>

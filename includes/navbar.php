@@ -42,7 +42,7 @@ if (isset($_SESSION['auth_user']) && !empty($_SESSION['auth_user'])) {
                     <i class="ri-user-line text-2xl"></i>
                 </a>
 
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
+                <?php if (isset($_SESSION['role']) && in_array($_SESSION['role'], [1, 2])): ?>
                 <a href="admin/" class="relative flex items-center gap-2 text-slate-600">
                     <i class="ri-login-circle-line text-2xl"></i>
                 </a>

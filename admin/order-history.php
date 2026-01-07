@@ -1,22 +1,21 @@
-<?php include('../middleware/adminMiddleware.php') ?>
+<?php 
+include('../middleware/staffMiddleware.php');  // ← Ini cukup untuk role 1 & 2
+?>
 <?php include('functions/adminFunctions.php') ?>
-<?php include('../admin/app/Model/order_model.php') ?>
 <?php include('template/header.php');?>
 
     <!-- SIDEBAR -->
     <?php include('template/sidebar.php')?>
 
-    <!-- CONTENT -->
+   <!-- CONTENT -->
     <main class="flex-1 p-8 md:pt-8 pt-24">
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900 mb-1">Riwayat Order</h1>
-        <p class="text-gray-500">Daftar pesanan yang telah selesai atau dibatalkan</p>
+        <h1 class="text-3xl font-bold text-gray-900 mb-1">Semua Order</h1>
+        <p class="text-gray-500">Kelola semua pesanan dari pelanggan</p>
       </div>
 
         <?php
-            $orderModel = new OrderModel($con);
-            $orders = $orderModel->getOrderHistory();
-
+            $orders = getOrderHistory();
 
             if (mysqli_num_rows($orders) > 0) {
         ?>
@@ -27,16 +26,11 @@
                     
                     <div class="flex items-start justify-between mb-4 pb-4 border-b border-gray-100">
                         <div>
-                            <div class="flex items-center gap-2 mb-1">
-                                <p class="text-sm text-gray-500">Order #<?= $item['id_order'] ?></p>
-                                <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs font-medium rounded">
-                                    Selesai
-                                </span>
-                            </div>
+                            <p class="text-sm text-gray-500 mb-1">Order #<?= $item['id_order'] ?></p>
                             <p class="text-xl font-bold text-gray-900">Rp <?= number_format($item['total_harga'],0,',','.') ?></p>
                         </div>
                         <a href="order-details.php?t=<?= $item['no_tracking'] ?>"
-                           class="px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md hover:bg-gray-700 transition-colors">
+                           class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
                            Lihat Detail
                         </a>
                     </div>
@@ -64,7 +58,7 @@
             } else {
         ?>
                 <div class="text-center py-16 bg-gray-50 rounded-lg border border-gray-200">
-                    <p class="text-gray-500">Belum ada riwayat order.</p>
+                    <p class="text-gray-500">Belum ada order.</p>
                 </div>
         <?php
             }
