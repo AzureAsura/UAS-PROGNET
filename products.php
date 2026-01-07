@@ -68,7 +68,7 @@ if (isset($_GET['category'])) {
                 <?php
                     }
                 } else {
-                    echo "<p class='text-gray-600 text-center py-12'>No data available</p>";
+                    echo "<p class='text-gray-600 text-center py-12'>Data tidak tersedia</p>";
                 }
                 ?>
             </div>

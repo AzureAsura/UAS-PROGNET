@@ -8,8 +8,8 @@
     
     <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-bold text-slate-800">Add Category</h1>
-      <p class="text-slate-600 text-sm mt-1">Create a new category for your products</p>
+      <h1 class="text-2xl md:text-3xl font-bold text-slate-800">Tambah Kategori</h1>
+      <p class="text-slate-600 text-sm mt-1">Buat kategori baru untuk produk kamu</p>
     </div>
 
     <!-- Form Card -->
@@ -20,18 +20,18 @@
           
           <!-- Basic Information Section -->
           <div class="pb-4 border-b border-slate-200">
-            <h2 class="text-lg font-semibold text-slate-800 mb-4">Basic Information</h2>
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Informasi Dasar</h2>
             
             <div class="space-y-4">
               <!-- NAME -->
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1.5">
-                  Category Name <span class="text-red-500">*</span>
+                  Nama Kategori <span class="text-red-500">*</span>
                 </label>
                 <input 
                   type="text" 
                   name="nama_kategori" 
-                  placeholder="e.g., Electronics, Fashion, Home & Garden"
+                  placeholder="Nama kategori"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                   required
                 >
@@ -45,83 +45,83 @@
                 <input 
                   type="text" 
                   name="slug" 
-                  placeholder="e.g., electronics, fashion, home-garden"
+                  placeholder="Contoh: Apple-Watch"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                   required
                 >
-                <p class="text-xs text-slate-500 mt-1">URL-friendly version (lowercase, no spaces)</p>
+                <p class="text-xs text-slate-500 mt-1">Versi ramah URL (huruf kecil, tanpa spasi)</p>
               </div>
 
               <!-- DESCRIPTION -->
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Description</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Deskripsi</label>
                 <textarea 
                   rows="3" 
                   name="deskripsi" 
-                  placeholder="Brief description of this category..."
+                  placeholder="Deskripsi"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition resize-none"
                 ></textarea>
               </div>
 
               <!-- IMAGE -->
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Category Image</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Gambar Kategori</label>
                 <input 
                   type="file" 
                   name="gambar"
                   accept="image/*"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm bg-white file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
                 >
-                <p class="text-xs text-slate-500 mt-1">Recommended: 500x500px, max 2MB</p>
+                <p class="text-xs text-slate-500 mt-1">Disarankan: 500x500px, maksimal 2MB</p>
               </div>
             </div>
           </div>
 
           <!-- SEO Section -->
           <div class="pb-4 border-b border-slate-200">
-            <h2 class="text-lg font-semibold text-slate-800 mb-4">SEO Settings</h2>
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Pengaturan SEO</h2>
             
             <div class="space-y-4">
               <!-- META TITLE -->
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Title</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Judul Meta</label>
                 <input 
                   type="text" 
                   name="meta_title" 
-                  placeholder="SEO title for search engines"
+                  placeholder="Judul SEO untuk mesin pencari"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                 >
               </div>
 
               <!-- META DESCRIPTION -->
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Description</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Deskripsi Meta</label>
                 <textarea 
                   rows="2" 
                   name="meta_description" 
-                  placeholder="Brief description for search engine results"
+                  placeholder="Deskripsi singkat untuk hasil pencarian"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition resize-none"
                 ></textarea>
-                <p class="text-xs text-slate-500 mt-1">Recommended: 150-160 characters</p>
+                <p class="text-xs text-slate-500 mt-1">Disarankan: 150–160 karakter</p>
               </div>
 
               <!-- META KEYWORDS -->
               <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Keywords</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Kata Kunci Meta</label>
                 <input 
                   type="text" 
                   name="meta_keywords" 
-                  placeholder="keyword1, keyword2, keyword3"
+                  placeholder="kata kunci 1, kata kunci 2, kata kunci 3"
                   class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                 >
-                <p class="text-xs text-slate-500 mt-1">Separate keywords with commas</p>
+                <p class="text-xs text-slate-500 mt-1">Pisahkan kata kunci dengan koma</p>
               </div>
             </div>
           </div>
 
           <!-- Settings Section -->
           <div>
-            <h2 class="text-lg font-semibold text-slate-800 mb-4">Settings</h2>
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Pengaturan</h2>
             
             <div class="space-y-3">
               <!-- STATUS -->
@@ -133,8 +133,8 @@
                   class="w-4 h-4 text-slate-600 rounded border-slate-300 focus:ring-2 focus:ring-slate-400 cursor-pointer"
                 >
                 <label for="status" class="text-sm font-medium text-slate-700 cursor-pointer flex-1">
-                  Empty Status
-                  <span class="block text-xs text-slate-500 font-normal mt-0.5">Mark this category as empty</span>
+                  Status Kosong
+                  <span class="block text-xs text-slate-500 font-normal mt-0.5">Tandai kategori ini sebagai kosong</span>
                 </label>
               </div>
 
@@ -147,8 +147,8 @@
                   class="w-4 h-4 text-slate-600 rounded border-slate-300 focus:ring-2 focus:ring-slate-400 cursor-pointer"
                 >
                 <label for="popularitas" class="text-sm font-medium text-slate-700 cursor-pointer flex-1">
-                  Popular Category
-                  <span class="block text-xs text-slate-500 font-normal mt-0.5">Display in popular categories section</span>
+                  Kategori Populer
+                  <span class="block text-xs text-slate-500 font-normal mt-0.5">Tampilkan di bagian kategori populer</span>
                 </label>
               </div>
             </div>
@@ -163,14 +163,14 @@
             onclick="window.history.back()"
             class="w-full sm:w-auto px-6 py-2.5 border border-slate-300 text-slate-700 font-medium text-sm rounded-lg hover:bg-slate-50 transition"
           >
-            Cancel
+            Batal
           </button>
           <button 
             type="submit"
             name="add_category_btn"
             class="w-full sm:flex-1 bg-slate-800 text-white font-medium py-2.5 px-6 text-sm rounded-lg hover:bg-slate-700 transition shadow-sm"
           >
-            Create Category
+            Simpan Kategori
           </button>
         </div>
 

@@ -506,6 +506,22 @@ public function getOrderByTracking($tracking_no, $userId) {
         $stmt->close();
         return $items;
     }
+    public function getRandomProductsExceptSlug($table, $slug, $limit = 5)
+{
+    $query = "SELECT * FROM $table 
+              WHERE slug != ? AND status = 0
+              ORDER BY RAND() 
+              LIMIT ?";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("si", $slug, $limit); // s = string, i = integer
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
 
 }
 

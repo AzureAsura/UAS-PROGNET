@@ -45,7 +45,7 @@
                           type="text" 
                           name="nama_kategori" 
                           value="<?= $data['nama_kategori'] ?>"
-                          placeholder="Contoh: Elektronik, Fashion, Rumah & Taman"
+                          placeholder="Nama kategori"
                           class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                           required
                         >
@@ -60,7 +60,7 @@
                           type="text" 
                           name="slug" 
                           value="<?= $data['slug'] ?>"
-                          placeholder="Contoh: elektronik, fashion, rumah-taman"
+                          placeholder="Contoh: Apple-Watch"
                           class="w-full border border-slate-300 rounded-lg px-3.5 py-2.5 text-sm focus:ring-2 focus:ring-slate-400 focus:border-transparent outline-none transition"
                           required
                         >

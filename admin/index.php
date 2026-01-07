@@ -3,16 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include('../middleware/staffMiddleware.php');  // ← Ini cukup untuk role 1 & 2
+include('../middleware/staffMiddleware.php');  
 include('functions/adminFunctions.php');
 include('template/header.php');
-include('template/sidebar.php');  // ← Perbaikan typo: sideba → sidebar
+include('template/sidebar.php');  
 
-/* =====================
-   DATA DASHBOARD
-===================== */
-
-// Revenue (total harga dari order yang sudah dibayar status=1)
 $statistik = getStatistik();
 $revenue = 0;
 if ($statistik && mysqli_num_rows($statistik) > 0) {
@@ -20,37 +15,27 @@ if ($statistik && mysqli_num_rows($statistik) > 0) {
     $revenue = $row['tharga'] ?? 0;
 }
 
-// Order Aktif (status 1 atau 2)
 $orderAktif = getOrderOnGoing();
 
-// Order Selesai (status 3 atau 4)
 $orderHistory = getOrderHistory();
 
-// Order Sukses (asumsi status 3)
-$orderSuccess = getOrderSuccess();  // Pastikan function ini ada di adminFunctions.php
+$orderSuccess = getOrderSuccess(); 
 
-// Total Produk
+
 $totalProduk = getTotalProduk();
 
-// Total Kategori
 $totalKategori = getTotalKategori();
 
-// Total User
 $totalUser = getTotalUser();
 
-// Order Pending (status 0)
 $pendingOrders = getPendingOrders();
 
-// Top 5 Produk Terlaris
 $topProducts = getTopProducts(5);
 
-// Bukti Pembayaran yang diupload
 $uploadedPayments = getUploadedPayments();
 
-// Log hari ini
 $todayLogsCount = getTodayLogsCount();
 
-// Fungsi label status
 function labelStatus($status) {
     switch ($status) {
         case 0: return '<span class="text-yellow-600 font-medium">Pesanan dibuat</span>';
@@ -65,35 +50,33 @@ function labelStatus($status) {
 
 <main class="flex-1 p-8 md:pt-8 pt-24 bg-gray-50 min-h-screen">
 
-    <!-- HEADER -->
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800">Dashboard Admin</h1>
         <p class="text-gray-500 mt-1">Ringkasan aktivitas dan transaksi toko hari ini</p>
     </div>
 
-    <!-- SUMMARY CARDS -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-xl text-white shadow-lg">
+        <div class="bg-slate-500 p-6 rounded-xl text-white shadow-lg">
             <p class="text-sm font-semibold uppercase">Total Revenue</p>
             <h3 class="text-3xl font-bold mt-2">Rp <?= number_format($revenue, 0, ',', '.') ?></h3>
         </div>
 
-        <div class="bg-gradient-to-br from-lime-500 to-lime-600 p-6 rounded-xl text-white shadow-lg">
+        <div class="bg-slate-500 p-6 rounded-xl text-white shadow-lg">
             <p class="text-sm font-semibold uppercase">Order Aktif</p>
             <h3 class="text-3xl font-bold mt-2"><?= mysqli_num_rows($orderAktif) ?></h3>
         </div>
 
-        <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 p-6 rounded-xl text-white shadow-lg">
+        <div class="bg-slate-500 p-6 rounded-xl text-white shadow-lg">
             <p class="text-sm font-semibold uppercase">Order Selesai</p>
             <h3 class="text-3xl font-bold mt-2"><?= mysqli_num_rows($orderHistory) ?></h3>
         </div>
 
-        <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-xl text-white shadow-lg">
+        <div class="bg-slate-500 p-6 rounded-xl text-white shadow-lg">
             <p class="text-sm font-semibold uppercase">Total Produk</p>
             <h3 class="text-3xl font-bold mt-2"><?= $totalProduk ?></h3>
         </div>
 
-        <div class="bg-gradient-to-br from-pink-500 to-pink-600 p-6 rounded-xl text-white shadow-lg">
+        <div class="bg-slate-500 p-6 rounded-xl text-white shadow-lg">
             <p class="text-sm font-semibold uppercase">Pending Orders</p>
             <h3 class="text-3xl font-bold mt-2"><?= $pendingOrders ?></h3>
         </div>
@@ -106,14 +89,11 @@ function labelStatus($status) {
         </div>
     <?php endif; ?>
 
-    <!-- LOG AKTIVITAS HARI INI -->
-    <div class="bg-gradient-to-br from-teal-500 to-teal-600 p-6 rounded-xl text-white shadow-lg mb-10">
-        <p class="text-sm font-semibold uppercase">Log Aktivitas Hari Ini</p>
-        <h3 class="text-3xl font-bold mt-2">
-            <?= $todayLogsCount ?>
-            <span class="text-base font-normal">perubahan status</span>
-        </h3>
+
+    <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-6 py-4 rounded-lg mb-8">
+        <strong>Informasi!</strong> Ada <?= $todayLogsCount ?> order log yang dibuat hari ini.
     </div>
+
 
     <!-- RECENT ORDERS -->
     <div class="bg-white rounded-xl border shadow-sm overflow-hidden mb-10">
