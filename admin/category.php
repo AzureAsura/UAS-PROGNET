@@ -2,92 +2,147 @@
 <?php include('template/header.php');?>
 <?php include('functions/adminFunctions.php') ?>
 
-
-
-
     <!-- SIDEBAR -->
     <?php include('template/sidebar.php')?>
 
     <!-- CONTENT -->
-    <main class="flex-1 p-8 md:pt-8 pt-24">
+    <style>
+.badge-green {
+  padding: 4px 10px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  border-radius: 9999px;
+}
+.badge-red {
+  padding: 4px 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 12px;
+  border-radius: 9999px;
+}
+</style>
 
-    <h4 class="text-2xl font-bold text-[#3C3F58] mb-6">Categories</h4>
+<main class="flex-1 p-4 sm:p-6 md:p-8 md:pt-8 pt-24">
 
-    <div class="bg-white rounded-xl shadow overflow-hidden">
-        
-        <!-- WRAPPER AGAR RESPONSIVE -->
-        <div class="overflow-x-auto">
-            <table class="min-w-full text-left text-sm">
-                <thead class="bg-black border-b">
-                    <tr>
-                        <th class="px-6 py-3 font-semibold text-white">ID</th>
-                        <th class="px-6 py-3 font-semibold text-white">Name</th>
-                        <th class="px-6 py-3 font-semibold text-white">Image</th>
-                        <th class="px-6 py-3 font-semibold text-white">Status</th>
-                        <th class="px-6 py-3 font-semibold text-white">Edit</th>
-                        <th class="px-6 py-3 font-semibold text-white">Delete</th>
-                    </tr>
-                </thead>
+  <h4 class="text-2xl font-bold text-[#3C3F58] mb-6">Categories</h4>
 
-                <tbody>
-                    <?php
-                        $category = getAll("tb_kategori");
+  <!-- ===================== -->
+  <!-- DESKTOP TABLE (md+) -->
+  <!-- ===================== -->
+  <div class="hidden md:block bg-white rounded-xl shadow overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-left text-sm">
+        <thead class="bg-black">
+          <tr>
+            <th class="px-6 py-3 text-white">ID</th>
+            <th class="px-6 py-3 text-white">Name</th>
+            <th class="px-6 py-3 text-white">Image</th>
+            <th class="px-6 py-3 text-white">Status</th>
+            <th class="px-6 py-3 text-white">Edit</th>
+            <th class="px-6 py-3 text-white">Delete</th>
+          </tr>
+        </thead>
 
-                        if(mysqli_num_rows($category) > 0){
-                            foreach ($category as $item) {
-                    ?>
-                        <tr class="border-b hover:bg-gray-100 transition">
-                            <td class="px-6 py-4"><?= $item['id_kategori']; ?></td>
-                            <td class="px-6 py-4 font-medium"><?= $item['nama_kategori']; ?></td>
-                            
-                            <td class="px-6 py-4">
-                                <img 
-                                    src="../uploads/<?= $item['gambar']; ?>" 
-                                    alt="<?= $item['nama_kategori']; ?>" 
-                                    class="h-12 w-12 object-cover rounded-md shadow-sm"
-                                >
-                            </td>
-
-                            <td class="px-6 py-4">
-                                <?php if($item['status'] == '0'): ?>
-                                    <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full">
-                                        Visible
-                                    </span>
-                                <?php else: ?>
-                                    <span class="px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full">
-                                        Hidden
-                                    </span>
-                                <?php endif; ?>
-                            </td>
-
-                            <td class="px-6 py-4">
-                                <a 
-                                  href="edit-category.php?id=<?= $item['id_kategori']; ?>" 
-                                  class="text-blue-600 hover:underline font-medium"
-                                >
-                                    Edit
-                                </a>
-                            </td>
-                            <td class="px-6 py-4">
-                                <form action="code.php" method="POST">
-                                    <input type="hidden" name="category_id" value="<?= $item['id_kategori']; ?>">
-                                    <button type="submit" class="text-red-600 hover:underline font-medium" name="delete_category_btn">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php
-                            }
-                        } else {
-                            echo "<tr><td colspan='5' class='text-center py-6 text-gray-500'>No records found</td></tr>";
-                        }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+        <tbody>
+          <?php 
+          $category = getAll("tb_kategori");
+          if(mysqli_num_rows($category) > 0): ?>
+            <?php foreach($category as $item): ?>
+            <tr class="border-b hover:bg-gray-100 transition">
+              <td class="px-6 py-4"><?= $item['id_kategori']; ?></td>
+              <td class="px-6 py-4 font-medium"><?= $item['nama_kategori']; ?></td>
+              <td class="px-6 py-4">
+                <img src="../uploads/<?= $item['gambar']; ?>"
+                  class="h-12 w-12 object-cover rounded-md shadow">
+              </td>
+              <td class="px-6 py-4">
+                <?php if($item['status'] == '0'): ?>
+                  <span class="badge-green">Visible</span>
+                <?php else: ?>
+                  <span class="badge-red">Hidden</span>
+                <?php endif; ?>
+              </td>
+              <td class="px-6 py-4">
+                <a href="edit-category.php?id=<?= $item['id_kategori']; ?>"
+                  class="text-blue-600 hover:underline">Edit</a>
+              </td>
+              <td class="px-6 py-4">
+                <form action="code.php" method="POST">
+                  <input type="hidden" name="category_id" value="<?= $item['id_kategori']; ?>">
+                  <button name="delete_category_btn"
+                    class="text-red-600 hover:underline">
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="6" class="text-center py-6 text-gray-500">
+                No records found
+              </td>
+            </tr>
+          <?php endif; ?>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- MOBILE CARD VIEW -->
+  <!-- ===================== -->
+  <div class="md:hidden space-y-4">
+    <?php 
+    $category = getAll("tb_kategori");
+    if(mysqli_num_rows($category) > 0): ?>
+      <?php foreach($category as $item): ?>
+      <div class="bg-white rounded-xl shadow p-4 flex gap-4">
+
+        <img src="../uploads/<?= $item['gambar']; ?>"
+          class="w-16 h-16 rounded-lg object-cover">
+
+        <div class="flex-1">
+          <h5 class="font-semibold text-gray-800">
+            <?= $item['nama_kategori']; ?>
+          </h5>
+
+          <p class="text-xs text-gray-500 mt-1">
+            ID: <?= $item['id_kategori']; ?>
+          </p>
+
+          <div class="mt-2">
+            <?php if($item['status'] == '0'): ?>
+              <span class="badge-green">Visible</span>
+            <?php else: ?>
+              <span class="badge-red">Hidden</span>
+            <?php endif; ?>
+          </div>
+
+          <div class="mt-3 flex gap-4 text-sm">
+            <a href="edit-category.php?id=<?= $item['id_kategori']; ?>"
+              class="text-blue-600 font-medium">
+              Edit
+            </a>
+
+            <form action="code.php" method="POST">
+              <input type="hidden" name="category_id" value="<?= $item['id_kategori']; ?>">
+              <button name="delete_category_btn"
+                class="text-red-600 font-medium">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p class="text-center text-gray-500">No records found</p>
+    <?php endif; ?>
+  </div>
 
 </main>
-
 
 
 

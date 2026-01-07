@@ -1,20 +1,53 @@
 <aside id="sidebar"
-  class="sticky top-0 self-start w-[300px] h-screen bg-black pl-3 text-white transition-all duration-300 z-40 flex flex-col">
+  class="fixed md:sticky top-0 left-0
+         w-[280px] h-screen
+         bg-black text-white z-50
+         flex flex-col
+         transition-transform duration-300
+         -translate-x-full md:translate-x-0">
 
-  <h3 class="text-[#707793] uppercase text-xs mb-4 px-7 pt-5">Menu</h3>
+  <!-- HEADER -->
+  <div class="flex items-center justify-between px-6 py-5">
+    <h3 class="uppercase text-xs text-gray-400">Menu</h3>
 
-  <nav class="flex-1 overflow-y-auto space-y-1">
-    <a href="index.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Home</a>
-    <a href="add-category.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Add Category</a>
-    <a href="category.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Category</a>
-    <a href="add-product.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Add Product</a>
-    <a href="products.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Products</a>
-    <a href="orders.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Orders</a>
-    <a href="order-on-going.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Order on going</a>
-    <a href="order-history.php" class="block py-5 px-7 hover:text-[#3bba9c] md:hover:border-r-4 md:hover:border-[#3bba9c]">Orders History</a>
+    <!-- CLOSE BUTTON (MOBILE ONLY) -->
+    <button onclick="closeSidebar()" class="md:hidden">
+      <i class="ri-close-line text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="flex-1 overflow-y-auto">
+    <a href="index.php" class="nav-item">Home</a>
+    <a href="add-category.php" class="nav-item">Add Category</a>
+    <a href="category.php" class="nav-item">Category</a>
+    <a href="add-product.php" class="nav-item">Add Product</a>
+    <a href="products.php" class="nav-item">Products</a>
+    <a href="orders.php" class="nav-item">Orders</a>
+    <a href="order-on-going.php" class="nav-item">Order On Going</a>
+    <a href="order-history.php" class="nav-item">Order History</a>
   </nav>
 
-  <a href="../logout.php" class="block py-5 px-7 hover:text-[#3bba9c] border-t border-gray-700">
-    Logout
+  <!-- LOGOUT -->
+  <a href="../logout.php"
+     class="px-6 py-4 border-t border-white/10 hover:bg-white/5">
+     Logout
   </a>
 </aside>
+
+<style>
+.nav-item {
+  display: block;
+  padding: 1rem 1.5rem;
+  transition: 0.3s;
+}
+.nav-item:hover {
+  background: rgba(255,255,255,0.05);
+  color: #3bba9c;
+}
+@media (min-width: 768px) {
+  .nav-item:hover {
+    border-right: 4px solid #3bba9c;
+  }
+}
+</style>
